@@ -8,8 +8,6 @@ This project is a **Next.js website** that introduces and explores **Ho Chi Minh
 
 - **Framework**: Next.js (React + TypeScript)
 - **Styling**: Tailwind CSS
-- **Backend / API**: Next.js API Routes
-- **Database (optional)**: MongoDB / MySQL
 
 ---
 

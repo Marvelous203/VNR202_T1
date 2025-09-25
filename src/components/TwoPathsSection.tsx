@@ -123,15 +123,15 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
       {/* Back Button */}
       <motion.button
         onClick={onBack}
-        className="absolute top-8 left-8 z-20 bg-white/90 hover:bg-white text-gray-800 px-6 py-3 rounded-full font-bold shadow-xl transition-all duration-300 flex items-center space-x-2 cursor-pointer hover:scale-105 ease-in-out"
+        className="absolute top-4 left-4 z-20 bg-white/90 hover:bg-white text-gray-800 px-4 py-2 rounded-full font-bold shadow-lg transition-all duration-300 flex items-center space-x-1 cursor-pointer hover:scale-105 ease-in-out"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <span className="text-xl">←</span>
-        <span>Quay lại</span>
+        <span className="text-lg">←</span>
+        <span className="text-sm">Quay lại</span>
       </motion.button>
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-10">
@@ -140,23 +140,23 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
         }} />
       </div>
 
-      <div className="relative z-10 p-8 flex-1 flex flex-col">
+      <div className="relative z-10 p-4 flex-1 flex flex-col">
         {/* Title */}
         <motion.div
-          className="text-center mb-8"
+          className="text-center mb-4"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
             Hai Lựa Chọn Trước Dân Tộc
           </h2>
-          <p className="text-base text-gray-300 max-w-4xl mx-auto mb-4">
+          <p className="text-sm text-gray-300 max-w-3xl mx-auto mb-2">
             Đầu thế kỷ XX, dân tộc Việt Nam đứng trước hai khả năng lựa chọn con đường phát triển
           </p>
           {exploredPaths.size < 2 && (
             <motion.p
-              className="text-yellow-400 font-semibold text-sm"
+              className="text-yellow-400 font-semibold text-xs"
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
@@ -165,7 +165,7 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
           )}
           {exploredPaths.size === 2 && !showTransition && (
             <motion.p
-              className="text-green-400 font-semibold text-sm"
+              className="text-green-400 font-semibold text-xs"
               animate={{ opacity: [0.7, 1, 0.7] }}
               transition={{ duration: 1.5, repeat: Infinity }}
             >
@@ -202,7 +202,7 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
         <div className="flex-1 flex items-center justify-center relative">
           {!showThirdPath ? (
             // Initial two paths
-            <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               {initialPathsData.map((path, index) => {
                 const isExplored = exploredPaths.has(path.id)
                 return (
@@ -216,7 +216,7 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
                     {/* Exploration badge */}
                     {isExplored && (
                       <motion.div
-                        className="absolute -top-3 -right-3 z-10 bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-xl shadow-lg"
+                        className="absolute -top-2 -right-2 z-10 bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-base shadow-md"
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ type: "spring", delay: 0.2 }}
@@ -226,8 +226,8 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
                     )}
 
                     <motion.div
-                      className={`bg-gradient-to-br ${path.color} rounded-2xl p-6 cursor-pointer shadow-2xl border-4 ${isExplored ? 'border-green-400 shadow-green-400/50' : 'border-white/20 hover:border-white/40'} h-[350px] relative overflow-hidden transition-all duration-300`}
-                      whileHover={{ scale: 1.05, rotateY: 5 }}
+                      className={`bg-gradient-to-br ${path.color} rounded-xl p-4 cursor-pointer shadow-xl border-2 ${isExplored ? 'border-green-400 shadow-green-400/40' : 'border-white/20 hover:border-white/40'} h-[300px] relative overflow-hidden transition-all duration-300`}
+                      whileHover={{ scale: 1.03 }}
                       onClick={() => handlePathClick(path.id)}
                       animate={isExplored ? {
                         boxShadow: [
@@ -244,15 +244,15 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
                         }
                       }}
                     >
-                      <div className="text-center mb-4">
-                        <div className="text-6xl mb-4">{path.icon}</div>
-                        <h3 className="text-2xl font-bold text-white mb-2">
+                      <div className="text-center mb-3">
+                        <div className="text-4xl mb-2">{path.icon}</div>
+                        <h3 className="text-xl font-bold text-white mb-1">
                           {path.title}
                         </h3>
-                        <p className="text-sm text-white font-semibold mb-3">
+                        <p className="text-xs text-white font-semibold mb-2">
                           ({path.shortName})
                         </p>
-                        <p className="text-white/90 text-sm leading-relaxed px-2">
+                        <p className="text-white/90 text-xs leading-relaxed px-1">
                           {path.description}
                         </p>
                       </div>
@@ -261,8 +261,8 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
                         className="text-center"
                         whileHover={{ scale: 1.1 }}
                       >
-                        <div className={`${isExplored ? 'bg-green-500/40 border-2 border-green-400' : 'bg-white/20 border-2 border-white/30'} rounded-xl py-3 px-6 inline-block transition-all duration-300 hover:scale-105`}>
-                          <span className="text-white font-bold text-sm">
+                        <div className={`${isExplored ? 'bg-green-500/40 border border-green-400' : 'bg-white/20 border border-white/30'} rounded-lg py-2 px-4 inline-block transition-all duration-300 hover:scale-105`}>
+                          <span className="text-white font-bold text-xs">
                             {isExplored ? '✅ Đã mở khóa - Xem lại' : '🔒 Nhấp để mở khóa'}
                           </span>
                         </div>
@@ -279,9 +279,9 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
               <AnimatePresence>
                 {showTransition && (
                   <motion.div
-                    className="flex justify-center items-center gap-20 mb-8 relative"
+                    className="flex justify-center items-center gap-12 mb-6 relative"
                     initial={{ opacity: 1, y: 0 }}
-                    animate={{ opacity: 0.6, y: -80, scale: 0.8 }}
+                    animate={{ opacity: 0.6, y: -60, scale: 0.8 }}
                     transition={{ duration: 1 }}
                   >
                     {initialPathsData.map((path, index) => (
@@ -293,18 +293,18 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
                         transition={{ duration: 0.8, delay: index * 0.1 }}
                       >
                         <motion.div
-                          className={`bg-gradient-to-br ${path.color} rounded-xl p-2 shadow-lg border-2 border-green-400 w-24 h-16 cursor-pointer opacity-80`}
+                          className={`bg-gradient-to-br ${path.color} rounded-lg p-2 shadow-md border border-green-400 w-20 h-14 cursor-pointer opacity-80`}
                           whileHover={{ scale: 0.65 }}
                           onClick={() => handlePathClick(path.id)}
                         >
                           <div className="text-center">
-                            <div className="text-sm mb-1">{path.icon}</div>
-                            <h4 className="text-xs font-bold text-white">
+                            <div className="text-xs mb-1">{path.icon}</div>
+                            <h4 className="text-[10px] font-bold text-white">
                               {path.shortName}
                             </h4>
                           </div>
                         </motion.div>
-                        <div className="absolute -top-1 -right-1 bg-green-500 text-white rounded-full w-4 h-4 flex items-center justify-center font-bold text-xs">
+                        <div className="absolute -top-1 -right-1 bg-green-500 text-white rounded-full w-3.5 h-3.5 flex items-center justify-center font-bold text-[10px]">
                           ✓
                         </div>
                       </motion.div>
@@ -317,7 +317,7 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
               <AnimatePresence>
                 {showThirdPath && (
                   <motion.div
-                    className="w-full max-w-3xl mx-auto"
+                    className="w-full max-w-2xl mx-auto"
                     initial={{ opacity: 0, y: 150, scale: 0.5, rotateX: -90 }}
                     animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
                     transition={{
@@ -328,7 +328,7 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
                     }}
                   >
                     <motion.div
-                      className={`bg-gradient-to-br ${transitionPath.color} rounded-2xl p-8 shadow-2xl border-4 border-yellow-400 relative overflow-hidden cursor-pointer`}
+                      className={`bg-gradient-to-br ${transitionPath.color} rounded-xl p-6 shadow-xl border-2 border-yellow-400 relative overflow-hidden cursor-pointer`}
                       whileHover={{ scale: 1.02 }}
                       onClick={() => handlePathClick(transitionPath.id)}
                       animate={{
@@ -348,7 +348,7 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
                     >
                       {/* Special badge */}
                       <motion.div
-                        className="absolute top-4 right-4 bg-yellow-400 text-gray-800 rounded-full px-4 py-2 font-bold text-sm"
+                        className="absolute top-3 right-3 bg-yellow-400 text-gray-800 rounded-full px-3 py-1.5 font-bold text-xs"
                         initial={{ scale: 0, rotate: -180 }}
                         animate={{ scale: 1, rotate: 0 }}
                         transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
@@ -356,9 +356,9 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
                         🎯 Lựa chọn của HCM
                       </motion.div>
 
-                      <div className="text-center mb-6">
+                      <div className="text-center mb-4">
                         <motion.div
-                          className="text-7xl mb-4"
+                          className="text-5xl mb-2"
                           initial={{ scale: 0, rotate: 180 }}
                           animate={{ scale: 1, rotate: 0 }}
                           transition={{ delay: 0.2, type: "spring", stiffness: 150 }}
@@ -366,7 +366,7 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
                           {transitionPath.icon}
                         </motion.div>
                         <motion.h3
-                          className="text-3xl font-bold text-white mb-3"
+                          className="text-2xl font-bold text-white mb-2"
                           initial={{ opacity: 0, y: 30 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.4, duration: 0.8 }}
@@ -374,7 +374,7 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
                           {transitionPath.title}
                         </motion.h3>
                         <motion.p
-                          className="text-white/90 text-lg leading-relaxed"
+                          className="text-white/90 text-sm leading-relaxed"
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.6, duration: 0.8 }}
@@ -390,7 +390,7 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
                         transition={{ delay: 0.8, duration: 0.6 }}
                       >
                         <motion.div
-                          className="bg-yellow-400/20 border-2 border-yellow-400 rounded-xl py-4 px-6 inline-block cursor-pointer transition-all duration-300"
+                          className="bg-yellow-400/20 border border-yellow-400 rounded-lg py-3 px-5 inline-block cursor-pointer transition-all duration-300"
                           whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 215, 0, 0.3)" }}
                           whileTap={{ scale: 0.95 }}
                           animate={{
@@ -404,7 +404,7 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
                             }
                           }}
                         >
-                          <span className="text-white font-bold text-lg">
+                          <span className="text-white font-bold text-sm">
                             🔓 Nhấp để khám phá sáng tạo của Hồ Chí Minh
                           </span>
                         </motion.div>
@@ -421,14 +421,14 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
         <AnimatePresence>
           {selectedPath && (
             <motion.div
-              className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+              className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-3"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={handleModalClose}
             >
               <motion.div
-                className="bg-white rounded-2xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+                className="bg-white rounded-xl p-6 max-w-3xl w-full max-h-[85vh] overflow-y-auto shadow-2xl"
                 initial={{ scale: 0.5, opacity: 0, rotateX: -90 }}
                 animate={{ scale: 1, opacity: 1, rotateX: 0 }}
                 exit={{ scale: 0.5, opacity: 0, rotateX: 90 }}
@@ -439,32 +439,32 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
                   .filter(path => path.id === selectedPath)
                   .map(path => (
                     <div key={path.id}>
-                      <div className="text-center mb-8">
-                        <div className="text-8xl mb-4">{path.icon}</div>
-                        <h3 className="text-4xl font-bold text-gray-800 mb-4">
+                      <div className="text-center mb-4">
+                        <div className="text-6xl mb-2">{path.icon}</div>
+                        <h3 className="text-2xl font-bold text-gray-800 mb-2">
                           {path.title}
                         </h3>
-                        <p className="text-gray-600 text-xl">
+                        <p className="text-gray-600 text-sm">
                           {path.description}
                         </p>
                       </div>
 
-                      <div className="grid md:grid-cols-2 gap-8 mb-8">
+                      <div className="grid md:grid-cols-2 gap-6 mb-6">
                         {/* Advantages */}
                         <div>
-                          <h4 className="text-2xl font-bold text-green-700 mb-4 flex items-center">
+                          <h4 className="text-lg font-bold text-green-700 mb-2 flex items-center">
                             <span className="mr-2">✅</span> Ưu điểm
                           </h4>
-                          <ul className="space-y-3">
+                          <ul className="space-y-2">
                             {path.advantages.map((advantage, index) => (
                               <motion.li
                                 key={index}
-                                className="flex items-start space-x-3 text-gray-700"
+                                className="flex items-start space-x-2 text-gray-700 text-sm"
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: index * 0.1 }}
                               >
-                                <span className="text-green-600 text-xl">•</span>
+                                <span className="text-green-600 text-base">•</span>
                                 <span>{advantage}</span>
                               </motion.li>
                             ))}
@@ -473,19 +473,19 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
 
                         {/* Disadvantages */}
                         <div>
-                          <h4 className="text-2xl font-bold text-red-700 mb-4 flex items-center">
+                          <h4 className="text-lg font-bold text-red-700 mb-2 flex items-center">
                             <span className="mr-2">❌</span> Nhược điểm
                           </h4>
-                          <ul className="space-y-3">
+                          <ul className="space-y-2">
                             {path.disadvantages.map((disadvantage, index) => (
                               <motion.li
                                 key={index}
-                                className="flex items-start space-x-3 text-gray-700"
+                                className="flex items-start space-x-2 text-gray-700 text-sm"
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: index * 0.1 }}
                               >
-                                <span className="text-red-600 text-xl">•</span>
+                                <span className="text-red-600 text-base">•</span>
                                 <span>{disadvantage}</span>
                               </motion.li>
                             ))}
@@ -494,11 +494,11 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
                       </div>
 
                       {/* HCM Opinion */}
-                      <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6 mb-8">
-                        <h4 className="text-2xl font-bold text-yellow-800 mb-3 flex items-center">
+                      <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
+                        <h4 className="text-lg font-bold text-yellow-800 mb-2 flex items-center">
                           <span className="mr-2">💭</span> Quan điểm Hồ Chí Minh
                         </h4>
-                        <p className="text-yellow-900 text-lg italic">
+                        <p className="text-yellow-900 text-sm italic">
                           &quot;{path.hcmOpinion}&quot;
                         </p>
                       </div>
@@ -506,7 +506,7 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
                       <div className="text-center">
                         <button
                           onClick={handleModalClose}
-                          className="bg-gray-600 hover:bg-gray-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors mr-4 cursor-pointer"
+                          className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-md font-semibold text-sm transition-colors mr-3 cursor-pointer"
                         >
                           Đóng
                         </button>
@@ -523,14 +523,14 @@ export default function TwoPathsSection({ onNext, onBack }: TwoPathsSectionProps
         {
           showNextButton && (
             <motion.div
-              className="fixed bottom-8 right-8"
+              className="fixed bottom-4 right-4"
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
             >
               <motion.button
                 onClick={onNext}
-                className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl cursor-pointer"
+                className="bg-orange-600 hover:bg-orange-700 text-white px-5 py-3 rounded-full font-bold text-sm shadow-xl cursor-pointer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 animate={{

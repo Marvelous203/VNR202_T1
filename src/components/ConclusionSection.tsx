@@ -44,15 +44,15 @@ export default function ConclusionSection({ onNext, onBack }: ConclusionSectionP
       {/* Back Button */}
       <motion.button
         onClick={onBack}
-        className="absolute top-8 left-8 z-20 bg-white/90 hover:bg-white text-red-800 px-6 py-3 rounded-full font-bold shadow-xl transition-all duration-300 flex items-center space-x-2 cursor-pointer hover:scale-105 ease-in-out"
+        className="absolute top-4 left-4 z-20 bg-white/90 hover:bg-white text-red-800 px-4 py-2 rounded-full font-bold shadow-lg transition-all duration-300 flex items-center space-x-1 cursor-pointer hover:scale-105 ease-in-out"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <span className="text-xl">←</span>
-        <span>Quay lại</span>
+        <span className="text-lg">←</span>
+        <span className="text-sm">Quay lại</span>
       </motion.button>
       {/* Radial light effect */}
       <div className="absolute inset-0">
@@ -142,11 +142,11 @@ export default function ConclusionSection({ onNext, onBack }: ConclusionSectionP
               transition={{ duration: 1, type: "spring" }}
             >
 
-              <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 md:p-6 border-2 border-yellow-400/30 shadow-xl max-w-4xl mx-auto">
+              <div className="bg-white/10 backdrop-blur-lg rounded-xl p-3 md:p-4 border border-yellow-400/30 shadow-lg max-w-3xl mx-auto">
 
                 {/* Title */}
                 <motion.h2
-                  className="text-2xl md:text-3xl lg:text-4xl font-bold text-yellow-100 mb-8"
+                  className="text-xl md:text-2xl lg:text-3xl font-bold text-yellow-100 mb-4"
                   initial={{ opacity: 0, y: -50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1 }}
@@ -154,7 +154,7 @@ export default function ConclusionSection({ onNext, onBack }: ConclusionSectionP
                   Kết Luận: Con Đường Quá Độ Lên CNXH
                 </motion.h2>
                 <motion.div
-                  className="text-4xl md:text-5xl mb-4"
+                  className="text-3xl md:text-4xl mb-2"
                   animate={{
                     rotateY: [0, 360],
                     scale: [1, 1.1, 1]
@@ -167,7 +167,7 @@ export default function ConclusionSection({ onNext, onBack }: ConclusionSectionP
                   🎯
                 </motion.div>
 
-                <div className="text-sm md:text-base lg:text-lg text-white leading-relaxed font-medium">
+                <div className="text-xs md:text-sm lg:text-base text-white leading-relaxed font-medium">
                   <TypingEffect
                     text={conclusionText}
                     speed={35}
@@ -214,7 +214,7 @@ export default function ConclusionSection({ onNext, onBack }: ConclusionSectionP
                   }}
                 />
 
-                <div className="relative bg-gradient-to-r from-yellow-500/20 via-yellow-400/30 to-yellow-500/20 backdrop-blur-lg rounded-xl p-4 md:p-6 border border-yellow-400/50 shadow-xl max-w-3xl mx-auto">
+                <div className="relative bg-gradient-to-r from-yellow-500/20 via-yellow-400/30 to-yellow-500/20 backdrop-blur-lg rounded-lg p-3 md:p-4 border border-yellow-400/50 shadow-lg max-w-2xl mx-auto">
                   <motion.div
                     className="mb-3 filter drop-shadow-lg flex justify-center"
                     animate={{
@@ -229,13 +229,13 @@ export default function ConclusionSection({ onNext, onBack }: ConclusionSectionP
                     <Image
                       src="/images/Ho_Chi_Minh.jpg"
                       alt="Chủ tịch Hồ Chí Minh"
-                      width={80}
-                      height={80}
-                      className="rounded-full border-2 border-yellow-400 shadow-lg"
+                      width={64}
+                      height={64}
+                      className="rounded-full border border-yellow-400 shadow-md"
                     />
                   </motion.div>
 
-                  <blockquote className="text-lg md:text-xl lg:text-2xl font-bold text-yellow-100 leading-tight">
+                  <blockquote className="text-base md:text-lg lg:text-xl font-bold text-yellow-100 leading-tight">
                     <TypingEffect
                       text={`"${quote}"`}
                       speed={60}
@@ -245,7 +245,7 @@ export default function ConclusionSection({ onNext, onBack }: ConclusionSectionP
                   </blockquote>
 
                   <motion.div
-                    className="text-sm md:text-base text-yellow-200 mt-3 italic"
+                    className="text-xs md:text-sm text-yellow-200 mt-2 italic"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 4 }}
@@ -301,7 +301,7 @@ export default function ConclusionSection({ onNext, onBack }: ConclusionSectionP
             >
               <motion.button
                 onClick={onNext}
-                className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-red-900 px-6 md:px-8 py-3 md:py-4 rounded-full font-bold text-base md:text-lg shadow-xl border-2 border-yellow-300"
+                className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 text-red-900 px-5 md:px-6 py-2.5 md:py-3 rounded-full font-bold text-sm md:text-base shadow-lg border border-yellow-300"
                 whileHover={{
                   scale: 1.05,
                   rotateZ: [0, -1, 1, 0],

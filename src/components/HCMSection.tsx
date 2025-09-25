@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 
 interface IdeaData {
   id: string
@@ -18,7 +19,7 @@ const ideasData: IdeaData[] = [
     title: 'Độc lập dân tộc',
     content: 'Độc lập là quyền thiêng liêng, bất khả xâm phạm của các dân tộc. "Không có gì quý hơn độc lập, tự do". Độc lập phải thật sự, hoàn toàn, triệt để - bao gồm chính trị, kinh tế, quân sự, ngoại giao.',
     icon: '🏛️',
-    position: { x: -50, y: -220 },
+    position: { x: -50, y: -150 },
     color: 'from-red-500 to-red-700'
   },
   {
@@ -34,7 +35,7 @@ const ideasData: IdeaData[] = [
     title: 'Gắn với CNXH',
     content: 'Cách mạng giải phóng dân tộc muốn thắng lợi phải đi theo con đường cách mạng vô sản. Chỉ có cách mạng vô sản mới đảm bảo giải phóng dân tộc triệt để.',
     icon: '⚖️',
-    position: { x: -50, y: 150 },
+    position: { x: -50, y: 90 },
     color: 'from-green-500 to-green-700'
   },
   {
@@ -67,15 +68,15 @@ export default function HCMSection({ onNext, onBack }: HCMSectionProps) {
       {/* Back Button */}
       <motion.button
         onClick={onBack}
-        className="absolute top-8 left-8 z-20 bg-white/90 hover:bg-white text-red-800 px-6 py-3 rounded-full font-bold shadow-xl transition-all duration-300 flex items-center space-x-2 cursor-pointer hover:scale-105 ease-in-out"
+        className="absolute top-4 left-4 z-20 bg-white/90 hover:bg-white text-red-800 px-4 py-2 rounded-full font-bold shadow-lg transition-all duration-300 flex items-center space-x-1 cursor-pointer hover:scale-105 ease-in-out"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <span className="text-xl">←</span>
-        <span>Quay lại</span>
+        <span className="text-lg">←</span>
+        <span className="text-sm">Quay lại</span>
       </motion.button>
 
       {/* Simplified background with floating particles */}
@@ -108,14 +109,14 @@ export default function HCMSection({ onNext, onBack }: HCMSectionProps) {
         <AnimatePresence>
           {!showIdeas && (
             <motion.div
-              className="text-center mb-12"
+              className="text-center mb-6"
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -30, transition: { duration: 0.5 } }}
               transition={{ duration: 0.8 }}
             >
               <motion.h2
-                className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-yellow-200 to-yellow-400 bg-clip-text text-transparent mb-2"
+                className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-yellow-200 to-yellow-400 bg-clip-text text-transparent mb-1"
                 animate={!showIdeas ? {
                   textShadow: [
                     "0 0 20px rgba(251, 191, 36, 0.5)",
@@ -128,7 +129,7 @@ export default function HCMSection({ onNext, onBack }: HCMSectionProps) {
                 TƯ TƯỞNG HỒ CHÍ MINH
               </motion.h2>
               <motion.h3
-                className="text-xl md:text-2xl font-semibold text-yellow-300/90"
+                className="text-sm md:text-base font-semibold text-yellow-300/90"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
@@ -141,14 +142,14 @@ export default function HCMSection({ onNext, onBack }: HCMSectionProps) {
 
         {/* Enhanced Central Portrait */}
         <motion.div
-          className="relative mb-8 cursor-pointer"
+          className="relative mb-4 cursor-pointer"
           initial={{ opacity: 0, scale: 0.3 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, delay: 0.8, type: "spring", stiffness: 100 }}
           onClick={handleCenterClick}
         >
           <motion.div
-            className="w-72 h-72 mx-auto rounded-full overflow-hidden relative group"
+            className="w-52 h-52 mx-auto rounded-full overflow-hidden relative group"
             whileHover={{ scale: 1.05 }}
             animate={showIdeas ? {} : {
               boxShadow: [
@@ -166,13 +167,16 @@ export default function HCMSection({ onNext, onBack }: HCMSectionProps) {
             }}
           >
             {/* Multiple border layers for depth */}
-            <div className="absolute inset-0 rounded-full border-4 border-yellow-300/50 z-10"></div>
+            <div className="absolute inset-0 rounded-full border-3 border-yellow-300/50 z-10"></div>
             <div className="absolute inset-2 rounded-full border-2 border-yellow-400/70 z-10"></div>
 
-            <img
+            <Image
               src="/images/Ho_Chi_Minh.jpg"
               alt="Hồ Chí Minh"
+              width={208}
+              height={208}
               className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+              priority
             />
 
             {/* Enhanced overlay effects */}
@@ -194,13 +198,13 @@ export default function HCMSection({ onNext, onBack }: HCMSectionProps) {
 
           {!showIdeas && (
             <motion.div
-              className="mt-6"
+              className="mt-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.5 }}
             >
               <motion.p
-                className="text-yellow-200 text-lg font-medium bg-black/20 backdrop-blur-sm px-6 py-3 rounded-full inline-block"
+                className="text-yellow-200 text-sm font-medium bg-black/20 backdrop-blur-sm px-4 py-2 rounded-full inline-block"
                 animate={{
                   opacity: [0.7, 1, 0.7],
                   scale: [0.98, 1, 0.98]
@@ -239,11 +243,11 @@ export default function HCMSection({ onNext, onBack }: HCMSectionProps) {
               }}
             >
               <motion.div
-                className={`w-52 h-36 bg-gradient-to-br ${idea.color} rounded-3xl p-4 cursor-pointer shadow-2xl border-3 border-white/80 backdrop-blur-sm relative overflow-hidden group`}
+                className={`w-40 h-28 bg-gradient-to-br ${idea.color} rounded-2xl p-3 cursor-pointer shadow-xl border-2 border-white/80 backdrop-blur-sm relative overflow-hidden group`}
                 whileHover={{
-                  scale: 1.15,
-                  rotateZ: 2,
-                  boxShadow: "0 20px 40px rgba(0,0,0,0.3)"
+                  scale: 1.08,
+                  rotateZ: 1,
+                  boxShadow: "0 16px 30px rgba(0,0,0,0.25)"
                 }}
                 onClick={() => setSelectedIdea(idea.id)}
               >
@@ -266,12 +270,12 @@ export default function HCMSection({ onNext, onBack }: HCMSectionProps) {
 
                 <div className="relative text-center h-full flex flex-col justify-center">
                   <motion.div
-                    className="text-4xl mb-2"
+                    className="text-3xl mb-1"
                     whileHover={{ scale: 1.2, rotate: 10 }}
                   >
                     {idea.icon}
                   </motion.div>
-                  <h3 className="text-white font-bold text-sm leading-tight drop-shadow-lg">
+                  <h3 className="text-white font-bold text-xs leading-tight drop-shadow-lg">
                     {idea.title}
                   </h3>
                 </div>
@@ -293,7 +297,7 @@ export default function HCMSection({ onNext, onBack }: HCMSectionProps) {
                   x2={`calc(50% + ${idea.position.x}px)`}
                   y2={`calc(50% + ${idea.position.y}px)`}
                   stroke="url(#gradient)"
-                  strokeWidth="2"
+                  strokeWidth="1.5"
                   strokeDasharray="8 4"
                   initial={{ pathLength: 0, opacity: 0 }}
                   animate={{ pathLength: 1, opacity: 0.8 }}
@@ -315,14 +319,14 @@ export default function HCMSection({ onNext, onBack }: HCMSectionProps) {
         <AnimatePresence>
           {selectedIdea && (
             <motion.div
-              className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
+              className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-3"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedIdea(null)}
             >
               <motion.div
-                className="bg-white rounded-3xl p-10 max-w-2xl w-full shadow-2xl"
+                className="bg-white rounded-2xl p-6 max-w-xl w-full shadow-2xl max-h-[85vh] overflow-y-auto"
                 initial={{ scale: 0.8, opacity: 0, rotateY: -90 }}
                 animate={{ scale: 1, opacity: 1, rotateY: 0 }}
                 exit={{ scale: 0.8, opacity: 0, rotateY: 90 }}
@@ -334,7 +338,7 @@ export default function HCMSection({ onNext, onBack }: HCMSectionProps) {
                   .map(idea => (
                     <div key={idea.id} className="text-center">
                       <motion.div
-                        className="text-7xl mb-6"
+                        className="text-5xl mb-4"
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ delay: 0.2, type: "spring" }}
@@ -342,7 +346,7 @@ export default function HCMSection({ onNext, onBack }: HCMSectionProps) {
                         {idea.icon}
                       </motion.div>
                       <motion.h3
-                        className="text-4xl font-bold text-gray-800 mb-6"
+                        className="text-2xl font-bold text-gray-800 mb-4"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4 }}
@@ -350,7 +354,7 @@ export default function HCMSection({ onNext, onBack }: HCMSectionProps) {
                         {idea.title}
                       </motion.h3>
                       <motion.div
-                        className="text-gray-700 text-xl leading-relaxed mb-8 text-left"
+                        className="text-gray-700 text-sm leading-relaxed mb-6 text-left"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.6 }}
@@ -359,7 +363,7 @@ export default function HCMSection({ onNext, onBack }: HCMSectionProps) {
                       </motion.div>
                       <motion.button
                         onClick={() => setSelectedIdea(null)}
-                        className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-colors shadow-lg cursor-pointer"
+                        className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-bold text-sm transition-colors shadow-lg cursor-pointer"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.8 }}
@@ -378,14 +382,14 @@ export default function HCMSection({ onNext, onBack }: HCMSectionProps) {
         {/* Enhanced Next button */}
         {showNextButton && (
           <motion.div
-            className="fixed bottom-8 right-8"
+            className="fixed bottom-4 right-4"
             initial={{ opacity: 0, scale: 0, y: 100 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.8, type: "spring", stiffness: 150 }}
           >
             <motion.button
               onClick={onNext}
-              className="relative bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-red-900 px-8 py-4 rounded-full font-bold text-lg shadow-2xl overflow-hidden group cursor-pointer"
+              className="relative bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-red-900 px-5 py-3 rounded-full font-bold text-sm shadow-xl overflow-hidden group cursor-pointer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               animate={{
@@ -415,7 +419,7 @@ export default function HCMSection({ onNext, onBack }: HCMSectionProps) {
                   ease: "easeInOut"
                 }}
               />
-              <span className="relative z-10">
+              <span className="relative z-10 text-xs">
                 Tiếp theo: So sánh hai con đường →
               </span>
             </motion.button>

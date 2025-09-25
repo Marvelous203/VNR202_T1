@@ -10,19 +10,19 @@ interface FinalPageProps {
 
 export default function FinalPage({ onReplay, onBack, onQuiz }: FinalPageProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden flex items-center justify-center">
+    <div className="h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden flex items-center justify-center">
       {/* Back Button */}
       <motion.button
         onClick={onBack}
-        className="absolute top-8 left-8 z-20 bg-white/90 hover:bg-white text-blue-800 px-6 py-3 rounded-full font-bold shadow-xl transition-all duration-300 flex items-center space-x-2"
+        className="absolute top-4 left-4 z-20 bg-white/90 hover:bg-white text-blue-800 px-4 py-2 rounded-full font-bold shadow-lg transition-all duration-300 flex items-center space-x-1"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <span className="text-xl">←</span>
-        <span>Quay lại</span>
+        <span className="text-lg">←</span>
+        <span className="text-sm">Quay lại</span>
       </motion.button>
       {/* Background stars */}
       <div className="absolute inset-0">
@@ -88,17 +88,17 @@ export default function FinalPage({ onReplay, onBack, onQuiz }: FinalPageProps) 
         />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-8 text-center">
+      <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
         {/* Main content container */}
         <motion.div
-          className="bg-white/5 backdrop-blur-lg rounded-3xl p-12 border border-white/10 shadow-2xl"
+          className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10 shadow-xl"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, type: "spring" }}
         >
           {/* Celebration emoji */}
           <motion.div
-            className="text-8xl mb-8"
+            className="text-6xl mb-6"
             animate={{
               rotateZ: [0, 10, -10, 0],
               scale: [1, 1.1, 1],
@@ -114,7 +114,7 @@ export default function FinalPage({ onReplay, onBack, onQuiz }: FinalPageProps) 
 
           {/* Thank you message */}
           <motion.h1
-            className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight"
+            className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
@@ -128,15 +128,33 @@ export default function FinalPage({ onReplay, onBack, onQuiz }: FinalPageProps) 
 
           {/* Decorative line */}
           <motion.div
-            className="w-32 h-1 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto mb-8 rounded-full"
+            className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto mb-6 rounded-full"
             initial={{ width: 0 }}
-            animate={{ width: 128 }}
+            animate={{ width: 96 }}
             transition={{ duration: 1, delay: 1 }}
           />
 
+          {/* AI usage summary */}
+          <motion.div
+            className="bg-white/5 backdrop-blur-lg rounded-xl p-4 border border-white/10 shadow-lg mb-6 text-left max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+          >
+            <div className="flex items-center mb-2">
+              <span className="text-xl mr-2">🤖</span>
+              <h2 className="text-base md:text-lg font-bold text-white">Sử dụng AI trong bài trình bày</h2>
+            </div>
+            <ul className="list-disc pl-5 space-y-1.5 text-xs md:text-sm text-gray-300">
+              <li><span className="font-semibold text-white">Mục đích</span>: Ứng dụng AI để hệ thống hóa kiến thức, trực quan hóa và tối ưu trải nghiệm học.</li>
+              <li><span className="font-semibold text-white">ChatGPT</span>: Tìm hiểu nội dung, tóm lược tài liệu, gợi ý cấu trúc trình bày.</li>
+              <li><span className="font-semibold text-white">Cursor</span>: Hỗ trợ viết, chỉnh sửa và tối ưu code web nhanh chóng.</li>
+            </ul>
+          </motion.div>
+
           {/* Summary message */}
           <motion.p
-            className="text-xl text-gray-300 mb-12 leading-relaxed max-w-3xl mx-auto"
+            className="text-base text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1.5 }}
@@ -148,14 +166,14 @@ export default function FinalPage({ onReplay, onBack, onQuiz }: FinalPageProps) 
 
           {/* Action buttons */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 2 }}
           >
             <motion.button
               onClick={onQuiz}
-              className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-10 py-4 rounded-full font-bold text-lg shadow-2xl border-2 border-white/20 cursor-pointer"
+              className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-7 py-3 rounded-full font-bold text-sm shadow-xl border border-white/20 cursor-pointer"
               whileHover={{
                 scale: 1.05,
                 boxShadow: "0 0 40px rgba(34, 197, 94, 0.5)"
@@ -181,7 +199,7 @@ export default function FinalPage({ onReplay, onBack, onQuiz }: FinalPageProps) 
 
             <motion.button
               onClick={onReplay}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-10 py-4 rounded-full font-bold text-lg shadow-2xl border-2 border-white/20 cursor-pointer"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-7 py-3 rounded-full font-bold text-sm shadow-xl border border-white/20 cursor-pointer"
               whileHover={{
                 scale: 1.05,
                 boxShadow: "0 0 40px rgba(59, 130, 246, 0.5)"
@@ -207,37 +225,11 @@ export default function FinalPage({ onReplay, onBack, onQuiz }: FinalPageProps) 
             </motion.button>
           </motion.div>
 
-          {/* Additional decorative elements */}
-          <motion.div
-            className="flex justify-center space-x-8 mt-12"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2.5 }}
-          >
-            {['🇻🇳', '📚', '⭐', '🎯', '🎓'].map((emoji, index) => (
-              <motion.div
-                key={index}
-                className="text-3xl"
-                animate={{
-                  y: [0, -10, 0],
-                  rotate: [0, 5, -5, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  delay: index * 0.2,
-                  ease: "easeInOut"
-                }}
-              >
-                {emoji}
-              </motion.div>
-            ))}
-          </motion.div>
         </motion.div>
 
         {/* Footer credits */}
         <motion.div
-          className="mt-8 text-center"
+          className="hidden md:block mt-4 text-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 3 }}

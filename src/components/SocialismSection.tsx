@@ -131,40 +131,40 @@ export default function SocialismSection({ onNext, onBack }: SocialismSectionPro
       <div className="absolute inset-0 bg-gradient-to-br from-yellow-50/50 via-transparent to-amber-100/50" />
 
       {/* Navigation buttons */}
-      <div className="absolute top-8 left-8 right-8 flex justify-between z-20">
+      <div className="absolute top-4 left-4 right-4 flex justify-between z-20">
         <motion.button
           onClick={onBack}
-          className="bg-white/90 hover:bg-white text-amber-800 px-6 py-3 rounded-full font-bold shadow-xl transition-all duration-300 flex items-center space-x-2 cursor-pointer hover:scale-105"
+          className="bg-white/90 hover:bg-white text-amber-800 px-4 py-2 rounded-full font-bold shadow-lg transition-all duration-300 flex items-center space-x-1 cursor-pointer hover:scale-105"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <span className="text-xl">←</span>
-          <span>Quay lại</span>
+          <span className="text-lg">←</span>
+          <span className="text-sm">Quay lại</span>
         </motion.button>
 
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 p-8 pt-24 flex-1 overflow-y-auto">
+      <div className="relative z-10 p-4 pt-20 flex-1 overflow-y-auto">
         <motion.div
-          className="max-w-6xl mx-auto"
+          className="max-w-5xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
           {/* Section title */}
           <motion.div
-            className="text-center mb-12"
+            className="text-center mb-6"
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
             <div className="flex items-center justify-center mb-6">
               <motion.div
-                className="text-6xl mr-4"
+                className="text-4xl mr-3"
                 animate={{ rotate: [0, 10, -10, 0] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               >
@@ -172,7 +172,7 @@ export default function SocialismSection({ onNext, onBack }: SocialismSectionPro
               </motion.div>
               <div className="relative">
                 <motion.div
-                  className="w-20 h-20 rounded-full overflow-hidden border-4 border-amber-600 shadow-2xl"
+                  className="w-16 h-16 rounded-full overflow-hidden border-3 border-amber-600 shadow-xl"
                   whileHover={{ scale: 1.1 }}
                   animate={{
                     boxShadow: [
@@ -192,20 +192,20 @@ export default function SocialismSection({ onNext, onBack }: SocialismSectionPro
                   <Image
                     src="/images/Ho_Chi_Minh.jpg"
                     alt="Hồ Chí Minh"
-                    width={80}
-                    height={80}
+                    width={64}
+                    height={64}
                     className="object-cover"
                   />
                 </motion.div>
               </div>
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-bold text-amber-900 mb-4">
+            <h1 className="text-2xl md:text-3xl font-bold text-amber-900 mb-2">
               {socialismContent.title}
             </h1>
 
             <motion.p
-              className="text-xl text-amber-700 max-w-4xl mx-auto"
+              className="text-sm text-amber-700 max-w-3xl mx-auto"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -215,11 +215,11 @@ export default function SocialismSection({ onNext, onBack }: SocialismSectionPro
           </motion.div>
 
           {/* Main cards grid */}
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
             {socialismContent.sections.map((section, index) => (
               <motion.div
                 key={section.id}
-                className="bg-white/95 rounded-2xl p-8 border-3 border-amber-300 shadow-2xl cursor-pointer hover:shadow-3xl transition-all duration-300"
+                className="bg-white/95 rounded-xl p-6 border-2 border-amber-300 shadow-xl cursor-pointer hover:shadow-2xl transition-all duration-300"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 + index * 0.2 }}
@@ -227,11 +227,11 @@ export default function SocialismSection({ onNext, onBack }: SocialismSectionPro
                 onClick={() => handleModalOpen(section.id)}
               >
                 <div className="text-center mb-6">
-                  <div className="text-6xl mb-4">{section.icon}</div>
-                  <h3 className="text-2xl font-bold text-amber-800 mb-3">
+                  <div className="text-4xl mb-2">{section.icon}</div>
+                  <h3 className="text-xl font-bold text-amber-800 mb-2">
                     {section.title}
                   </h3>
-                  <p className="text-amber-700 text-base leading-relaxed">
+                  <p className="text-amber-700 text-sm leading-relaxed">
                     {section.description}
                   </p>
                 </div>
@@ -240,8 +240,8 @@ export default function SocialismSection({ onNext, onBack }: SocialismSectionPro
                   className="text-center"
                   whileHover={{ scale: 1.05 }}
                 >
-                  <div className="bg-amber-100 border-2 border-amber-400 rounded-xl py-3 px-6 inline-block transition-all duration-300">
-                    <span className="text-amber-800 font-bold text-sm">
+                  <div className="bg-amber-100 border border-amber-400 rounded-lg py-2 px-4 inline-block transition-all duration-300">
+                    <span className="text-amber-800 font-bold text-xs">
                       🔍 Nhấp để khám phá chi tiết
                     </span>
                   </div>
@@ -252,16 +252,16 @@ export default function SocialismSection({ onNext, onBack }: SocialismSectionPro
 
           {/* Summary quote */}
           <motion.div
-            className="bg-gradient-to-r from-amber-100 to-yellow-100 rounded-2xl p-8 border-3 border-amber-400 shadow-2xl text-center"
+            className="bg-gradient-to-r from-amber-100 to-yellow-100 rounded-xl p-6 border-2 border-amber-400 shadow-xl text-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1 }}
           >
-            <div className="text-4xl mb-4">💭</div>
-            <h3 className="text-2xl font-bold text-amber-800 mb-4">
+            <div className="text-3xl mb-2">💭</div>
+            <h3 className="text-xl font-bold text-amber-800 mb-2">
               Tầm nhìn của Hồ Chí Minh
             </h3>
-            <p className="text-amber-900 text-xl leading-relaxed italic max-w-4xl mx-auto">
+            <p className="text-amber-900 text-sm leading-relaxed italic max-w-3xl mx-auto">
               &quot;Chủ nghĩa xã hội không chỉ là mục tiêu kinh tế mà còn là lý tưởng nhân văn.
               Đó là xã hội không còn áp bức, bóc lột, mọi người đều bình đẳng và có điều kiện phát triển toàn diện.&quot;
             </p>
@@ -273,14 +273,14 @@ export default function SocialismSection({ onNext, onBack }: SocialismSectionPro
       <AnimatePresence>
         {selectedModal && (
           <motion.div
-            className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-3"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleModalClose}
           >
             <motion.div
-              className="bg-white rounded-3xl p-8 max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+              className="bg-white rounded-2xl p-6 max-w-4xl w-full max-h-[85vh] overflow-y-auto shadow-2xl"
               initial={{ scale: 0.8, opacity: 0, rotateX: -90 }}
               animate={{ scale: 1, opacity: 1, rotateX: 0 }}
               exit={{ scale: 0.8, opacity: 0, rotateX: 90 }}
@@ -292,26 +292,26 @@ export default function SocialismSection({ onNext, onBack }: SocialismSectionPro
                 .map(section => (
                   <div key={section.id}>
                     {/* Modal header */}
-                    <div className="text-center mb-8">
-                      <div className="text-8xl mb-4">{section.icon}</div>
-                      <h3 className="text-4xl font-bold text-amber-900 mb-4">
+                    <div className="text-center mb-4">
+                      <div className="text-6xl mb-2">{section.icon}</div>
+                      <h3 className="text-2xl font-bold text-amber-900 mb-2">
                         {section.title}
                       </h3>
-                      <p className="text-amber-700 text-xl leading-relaxed">
+                      <p className="text-amber-700 text-sm leading-relaxed">
                         {section.description}
                       </p>
                     </div>
 
                     {/* Introduction */}
-                    <div className="mb-8 bg-amber-50 rounded-2xl p-6 border-2 border-amber-200">
-                      <h4 className="text-2xl font-bold text-amber-800 mb-4">
+                    <div className="mb-6 bg-amber-50 rounded-xl p-4 border border-amber-200">
+                      <h4 className="text-lg font-bold text-amber-800 mb-2">
                         📖 Tổng quan
                       </h4>
-                      <p className="text-amber-900 text-lg leading-relaxed mb-4">
+                      <p className="text-amber-900 text-sm leading-relaxed mb-3">
                         {section.content.introduction}
                       </p>
                       {section.content.adaptability && (
-                        <p className="text-amber-800 text-base leading-relaxed">
+                        <p className="text-amber-800 text-xs leading-relaxed">
                           {section.content.adaptability}
                         </p>
                       )}
@@ -321,78 +321,22 @@ export default function SocialismSection({ onNext, onBack }: SocialismSectionPro
                     <div className="space-y-8">
                       {/* Characteristics or Dynamics */}
                       {section.content.characteristics && (
-                        <div className="bg-white border-2 border-amber-300 rounded-2xl p-6">
-                          <h4 className="text-2xl font-bold text-amber-800 mb-6 flex items-center">
+                        <div className="bg-white border border-amber-300 rounded-xl p-4">
+                          <h4 className="text-lg font-bold text-amber-800 mb-4 flex items-center">
                             <span className="mr-3">✨</span>
                             {section.content.characteristics.title}
                           </h4>
-                          <div className="grid md:grid-cols-3 gap-6">
+                          <div className="grid md:grid-cols-3 gap-4">
                             {section.content.characteristics.items.map((item, index) => (
                               <motion.div
                                 key={index}
-                                className="bg-amber-50 rounded-xl p-4 border border-amber-200"
+                                className="bg-amber-50 rounded-lg p-3 border border-amber-200"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.1 }}
-                              >
-                                <div className="text-3xl mb-3">{item.icon}</div>
-                                <h5 className="text-lg font-bold text-amber-800 mb-2">
-                                  {item.category}
-                                </h5>
-                                <p className="text-amber-700 text-sm leading-relaxed">
-                                  {item.description}
-                                </p>
-                              </motion.div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {section.content.dynamics && (
-                        <div className="bg-white border-2 border-amber-300 rounded-2xl p-6">
-                          <h4 className="text-2xl font-bold text-amber-800 mb-6 flex items-center">
-                            <span className="mr-3">⚡</span>
-                            {section.content.dynamics.title}
-                          </h4>
-                          <div className="grid md:grid-cols-3 gap-6">
-                            {section.content.dynamics.items.map((item, index) => (
-                              <motion.div
-                                key={index}
-                                className="bg-amber-50 rounded-xl p-4 border border-amber-200"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                              >
-                                <div className="text-3xl mb-3">{item.icon}</div>
-                                <h5 className="text-lg font-bold text-amber-800 mb-2">
-                                  {item.category}
-                                </h5>
-                                <p className="text-amber-700 text-sm leading-relaxed">
-                                  {item.description}
-                                </p>
-                              </motion.div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {section.content.comprehensiveAreas && (
-                        <div className="bg-white border-2 border-amber-300 rounded-2xl p-6">
-                          <h4 className="text-2xl font-bold text-amber-800 mb-6 flex items-center">
-                            <span className="mr-3">🔄</span>
-                            {section.content.comprehensiveAreas.title}
-                          </h4>
-                          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                            {section.content.comprehensiveAreas.items.map((item, index) => (
-                              <motion.div
-                                key={index}
-                                className="bg-amber-50 rounded-xl p-4 border border-amber-200"
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.05 }}
                               >
                                 <div className="text-2xl mb-2">{item.icon}</div>
-                                <h5 className="text-base font-bold text-amber-800 mb-2">
+                                <h5 className="text-base font-bold text-amber-800 mb-1">
                                   {item.category}
                                 </h5>
                                 <p className="text-amber-700 text-xs leading-relaxed">
@@ -404,16 +348,72 @@ export default function SocialismSection({ onNext, onBack }: SocialismSectionPro
                         </div>
                       )}
 
+                      {section.content.dynamics && (
+                        <div className="bg-white border border-amber-300 rounded-xl p-4">
+                          <h4 className="text-lg font-bold text-amber-800 mb-4 flex items-center">
+                            <span className="mr-3">⚡</span>
+                            {section.content.dynamics.title}
+                          </h4>
+                          <div className="grid md:grid-cols-3 gap-4">
+                            {section.content.dynamics.items.map((item, index) => (
+                              <motion.div
+                                key={index}
+                                className="bg-amber-50 rounded-lg p-3 border border-amber-200"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.1 }}
+                              >
+                                <div className="text-2xl mb-2">{item.icon}</div>
+                                <h5 className="text-base font-bold text-amber-800 mb-1">
+                                  {item.category}
+                                </h5>
+                                <p className="text-amber-700 text-xs leading-relaxed">
+                                  {item.description}
+                                </p>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {section.content.comprehensiveAreas && (
+                        <div className="bg-white border border-amber-300 rounded-xl p-4">
+                          <h4 className="text-lg font-bold text-amber-800 mb-4 flex items-center">
+                            <span className="mr-3">🔄</span>
+                            {section.content.comprehensiveAreas.title}
+                          </h4>
+                          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
+                            {section.content.comprehensiveAreas.items.map((item, index) => (
+                              <motion.div
+                                key={index}
+                                className="bg-amber-50 rounded-lg p-3 border border-amber-200"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.05 }}
+                              >
+                                <div className="text-xl mb-1">{item.icon}</div>
+                                <h5 className="text-sm font-bold text-amber-800 mb-1">
+                                  {item.category}
+                                </h5>
+                                <p className="text-amber-700 text-[11px] leading-relaxed">
+                                  {item.description}
+                                </p>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
                       {/* Conclusion quote */}
                       {section.content.conclusion && (
-                        <div className="bg-gradient-to-r from-amber-100 to-yellow-100 border-3 border-amber-400 rounded-2xl p-6">
+                        <div className="bg-gradient-to-r from-amber-100 to-yellow-100 border-2 border-amber-400 rounded-xl p-4">
                           <div className="flex items-start space-x-4">
-                            <div className="text-4xl">💭</div>
+                            <div className="text-3xl">💭</div>
                             <div>
-                              <h4 className="text-xl font-bold text-amber-800 mb-3">
+                              <h4 className="text-lg font-bold text-amber-800 mb-2">
                                 Quan điểm nhân văn của Hồ Chí Minh
                               </h4>
-                              <p className="text-amber-900 text-lg leading-relaxed italic">
+                              <p className="text-amber-900 text-sm leading-relaxed italic">
                                 &quot;{section.content.conclusion}&quot;
                               </p>
                             </div>
@@ -423,10 +423,10 @@ export default function SocialismSection({ onNext, onBack }: SocialismSectionPro
                     </div>
 
                     {/* Modal footer */}
-                    <div className="text-center mt-8">
+                    <div className="text-center mt-6">
                       <button
                         onClick={handleModalClose}
-                        className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-xl font-bold text-lg transition-colors shadow-xl cursor-pointer"
+                        className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 rounded-lg font-bold text-sm transition-colors shadow-lg cursor-pointer"
                       >
                         Đóng
                       </button>
@@ -441,14 +441,14 @@ export default function SocialismSection({ onNext, onBack }: SocialismSectionPro
       {/* Next button to continue to next page */}
       {showNextButton && (
         <motion.div
-          className="fixed bottom-8 right-8 z-10"
+          className="fixed bottom-4 right-4 z-10"
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
         >
           <motion.button
             onClick={handleNext}
-            className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl cursor-pointer"
+            className="bg-amber-600 hover:bg-amber-700 text-white px-5 py-3 rounded-full font-bold text-sm shadow-xl cursor-pointer"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             animate={{

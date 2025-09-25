@@ -94,15 +94,15 @@ export default function TransitionSection({ onNext, onBack }: TransitionSectionP
       {/* Back Button */}
       <motion.button
         onClick={onBack}
-        className="absolute top-8 left-8 z-20 bg-white/90 hover:bg-white text-purple-800 px-6 py-3 rounded-full font-bold shadow-xl transition-all duration-300 flex items-center space-x-2 cursor-pointer hover:scale-105 ease-in-out"
+        className="absolute top-4 left-4 z-20 bg-white/90 hover:bg-white text-purple-800 px-4 py-2 rounded-full font-bold shadow-lg transition-all duration-300 flex items-center space-x-1 cursor-pointer hover:scale-105 ease-in-out"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <span className="text-xl">←</span>
-        <span>Quay lại</span>
+        <span className="text-lg">←</span>
+        <span className="text-sm">Quay lại</span>
       </motion.button>
       {/* Background elements */}
       <div className="absolute inset-0">
@@ -138,7 +138,7 @@ export default function TransitionSection({ onNext, onBack }: TransitionSectionP
       <div className="relative z-10 flex-1 flex flex-col p-4 md:p-6">
         {/* Title */}
         <motion.div
-          className="text-center mb-12"
+          className="text-center mb-8"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
@@ -155,17 +155,17 @@ export default function TransitionSection({ onNext, onBack }: TransitionSectionP
               ease: "easeInOut"
             }}
           >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
               Nhiệm Vụ Thời Kỳ Quá Độ
             </h2>
           </motion.div>
           <motion.div
-            className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto mb-6 rounded-full"
+            className="w-20 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto mb-4 rounded-full"
             initial={{ width: 0 }}
-            animate={{ width: 96 }}
+            animate={{ width: 80 }}
             transition={{ duration: 1.5, delay: 0.5 }}
           />
-          <p className="text-lg md:text-xl lg:text-2xl text-purple-100 max-w-5xl mx-auto leading-relaxed font-medium">
+          <p className="text-sm md:text-base lg:text-lg text-purple-100 max-w-4xl mx-auto leading-relaxed font-medium">
             Đấu tranh cải tạo, xóa bỏ tàn tích của chế độ xã hội cũ, xây dựng các yếu tố mới
             <br />
             <span className="text-purple-200">phù hợp với quy luật tiến lên CNXH trên 4 lĩnh vực</span>
@@ -175,110 +175,10 @@ export default function TransitionSection({ onNext, onBack }: TransitionSectionP
         {/* Main roadmap */}
         <div className="flex-1 flex flex-col max-w-7xl mx-auto w-full">
           {/* Central road path */}
-          <div className="relative mb-8">
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-              <svg className="w-full h-40 md:h-48" viewBox="0 0 800 200">
-                {/* Road path with glow effect */}
-                <defs>
-                  <filter id="glow">
-                    <feGaussianBlur stdDeviation="4" result="coloredBlur" />
-                    <feMerge>
-                      <feMergeNode in="coloredBlur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-                </defs>
 
-                <motion.path
-                  d="M 50 150 Q 200 50 400 100 Q 600 150 750 50"
-                  stroke="url(#roadGradient)"
-                  strokeWidth="10"
-                  fill="none"
-                  strokeDasharray="25 15"
-                  filter="url(#glow)"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 3, delay: 0.5 }}
-                />
-
-                {/* Gradient definition */}
-                <defs>
-                  <linearGradient id="roadGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#FCD34D" />
-                    <stop offset="50%" stopColor="#F59E0B" />
-                    <stop offset="100%" stopColor="#D97706" />
-                  </linearGradient>
-                </defs>
-
-                {/* Road markers with enhanced design */}
-                {fieldsData.map((field, index) => {
-                  const positions = [
-                    { x: 100, y: 130 },
-                    { x: 300, y: 80 },
-                    { x: 500, y: 120 },
-                    { x: 700, y: 70 }
-                  ]
-
-                  const isCompleted = completedFields.has(field.id)
-
-                  return (
-                    <g key={field.id}>
-                      {/* Outer glow ring */}
-                      <motion.circle
-                        cx={positions[index].x}
-                        cy={positions[index].y}
-                        r="18"
-                        fill="none"
-                        stroke={isCompleted ? "#10B981" : "#6366F1"}
-                        strokeWidth="2"
-                        opacity="0.3"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: isCompleted ? [1, 1.2, 1] : 1 }}
-                        transition={{
-                          scale: { duration: 2, repeat: Infinity },
-                          delay: 1 + index * 0.3
-                        }}
-                      />
-                      {/* Main marker */}
-                      <motion.circle
-                        cx={positions[index].x}
-                        cy={positions[index].y}
-                        r="14"
-                        fill={isCompleted ? "#10B981" : "#6366F1"}
-                        stroke="#FFF"
-                        strokeWidth="3"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: 1 + index * 0.3, type: "spring" }}
-                        className="cursor-pointer drop-shadow-lg"
-                        whileHover={{ scale: 1.3 }}
-                        onClick={() => handleFieldClick(field.id)}
-                      />
-                      {/* Check mark for completed */}
-                      {isCompleted && (
-                        <motion.text
-                          x={positions[index].x}
-                          y={positions[index].y + 5}
-                          textAnchor="middle"
-                          fill="white"
-                          fontSize="14"
-                          fontWeight="bold"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ delay: 1.5 + index * 0.3 }}
-                        >
-                          ✓
-                        </motion.text>
-                      )}
-                    </g>
-                  )
-                })}
-              </svg>
-            </div>
-          </div>
 
           {/* Field cards */}
-          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
             {fieldsData.map((field, index) => (
               <motion.div
                 key={field.id}
@@ -293,7 +193,7 @@ export default function TransitionSection({ onNext, onBack }: TransitionSectionP
                 className="flex"
               >
                 <motion.div
-                  className={`bg-gradient-to-br ${field.color} rounded-2xl p-6 cursor-pointer shadow-2xl border-2 border-white/30 relative overflow-hidden flex-1 flex flex-col backdrop-blur-sm`}
+                  className={`bg-gradient-to-br ${field.color} rounded-xl p-4 cursor-pointer shadow-xl border-2 border-white/30 relative overflow-hidden flex-1 flex flex-col backdrop-blur-sm`}
                   whileHover={{
                     scale: 1.05,
                     rotateZ: 2,
@@ -313,13 +213,13 @@ export default function TransitionSection({ onNext, onBack }: TransitionSectionP
                   {/* Completion indicator */}
                   {completedFields.has(field.id) && (
                     <motion.div
-                      className="absolute top-3 right-3 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center shadow-lg"
+                      className="absolute top-2 right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center shadow-md"
                       initial={{ scale: 0, rotate: -180 }}
                       animate={{ scale: 1, rotate: 0 }}
                       transition={{ type: "spring", duration: 0.6, delay: 0.2 }}
                     >
                       <motion.span
-                        className="text-white text-sm font-bold"
+                        className="text-white text-xs font-bold"
                         animate={{ scale: [1, 1.2, 1] }}
                         transition={{ duration: 2, repeat: Infinity }}
                       >
@@ -331,7 +231,7 @@ export default function TransitionSection({ onNext, onBack }: TransitionSectionP
                   <div className="relative z-10 text-center flex-1 flex flex-col justify-between">
                     <div>
                       <motion.div
-                        className="text-4xl md:text-5xl mb-4"
+                        className="text-3xl md:text-4xl mb-3"
                         animate={{
                           rotateY: completedFields.has(field.id) ? [0, 360] : 0,
                           scale: [1, 1.1, 1]
@@ -343,20 +243,20 @@ export default function TransitionSection({ onNext, onBack }: TransitionSectionP
                       >
                         {field.icon}
                       </motion.div>
-                      <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-white mb-3 drop-shadow-md">
+                      <h3 className="text-base md:text-lg lg:text-xl font-bold text-white mb-2 drop-shadow-md">
                         {field.title}
                       </h3>
-                      <p className="text-white/90 text-sm md:text-base leading-relaxed mb-4 font-medium">
+                      <p className="text-white/90 text-xs md:text-sm leading-relaxed mb-3 font-medium">
                         {field.description}
                       </p>
                     </div>
 
                     <motion.div
-                      className="mt-4"
+                      className="mt-3"
                       whileHover={{ scale: 1.05 }}
                     >
-                      <div className="bg-white/25 backdrop-blur-sm rounded-xl py-3 px-4 border border-white/20">
-                        <span className="text-white text-sm font-bold flex items-center justify-center">
+                      <div className="bg-white/25 backdrop-blur-sm rounded-lg py-2 px-3 border border-white/20">
+                        <span className="text-white text-xs font-bold flex items-center justify-center">
                           <span className="mr-2">🔍</span>
                           Khám phá nhiệm vụ
                         </span>
@@ -376,7 +276,7 @@ export default function TransitionSection({ onNext, onBack }: TransitionSectionP
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2 }}
         >
-          <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-2xl">
+          <div className="bg-white/10 backdrop-blur-xl rounded-xl p-4 border border-white/20 shadow-xl">
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center space-x-3">
                 <motion.span
@@ -386,10 +286,10 @@ export default function TransitionSection({ onNext, onBack }: TransitionSectionP
                 >
                   📊
                 </motion.span>
-                <span className="text-white font-bold text-lg">Tiến độ khám phá:</span>
+                <span className="text-white font-bold text-sm">Tiến độ khám phá:</span>
               </div>
               <motion.span
-                className="text-purple-200 text-xl font-bold bg-white/10 px-4 py-2 rounded-full"
+                className="text-purple-200 text-base font-bold bg-white/10 px-3 py-1.5 rounded-full"
                 animate={{ scale: completedFields.size === fieldsData.length ? [1, 1.2, 1] : 1 }}
                 transition={{ duration: 0.5, repeat: completedFields.size === fieldsData.length ? Infinity : 0 }}
               >
@@ -398,9 +298,9 @@ export default function TransitionSection({ onNext, onBack }: TransitionSectionP
             </div>
 
             <div className="relative">
-              <div className="w-full bg-gray-700/50 rounded-full h-4 overflow-hidden shadow-inner">
+              <div className="w-full bg-gray-700/50 rounded-full h-3 overflow-hidden shadow-inner">
                 <motion.div
-                  className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-500 h-4 rounded-full relative overflow-hidden"
+                  className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-500 h-3 rounded-full relative overflow-hidden"
                   initial={{ width: 0 }}
                   animate={{ width: `${(completedFields.size / fieldsData.length) * 100}%` }}
                   transition={{ duration: 0.8, type: "spring" }}
@@ -433,14 +333,14 @@ export default function TransitionSection({ onNext, onBack }: TransitionSectionP
         <AnimatePresence>
           {selectedField && (
             <motion.div
-              className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+              className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-3"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={closeModal}
             >
               <motion.div
-                className="bg-white rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+                className="bg-white rounded-xl p-6 max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl"
                 initial={{ scale: 0.5, opacity: 0, rotateY: -90 }}
                 animate={{ scale: 1, opacity: 1, rotateY: 0 }}
                 exit={{ scale: 0.5, opacity: 0, rotateY: 90 }}
@@ -451,34 +351,34 @@ export default function TransitionSection({ onNext, onBack }: TransitionSectionP
                   .filter(field => field.id === selectedField)
                   .map(field => (
                     <div key={field.id}>
-                      <div className="text-center mb-8">
-                        <div className="text-8xl mb-4">{field.icon}</div>
-                        <h3 className="text-4xl font-bold text-gray-800 mb-4">
+                      <div className="text-center mb-4">
+                        <div className="text-6xl mb-2">{field.icon}</div>
+                        <h3 className="text-2xl font-bold text-gray-800 mb-2">
                           Lĩnh vực {field.title}
                         </h3>
-                        <p className="text-gray-600 text-xl">
+                        <p className="text-gray-600 text-sm">
                           {field.description}
                         </p>
                       </div>
 
-                      <div className="mb-8">
-                        <h4 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                      <div className="mb-6">
+                        <h4 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
                           <span className="mr-3">🎯</span> Nhiệm vụ chính:
                         </h4>
                         <div className="grid gap-4">
                           {field.tasks.map((task, index) => (
                             <motion.div
                               key={index}
-                              className="bg-gray-50 rounded-lg p-4 border-l-4 border-blue-500"
+                              className="bg-gray-50 rounded-lg p-3 border-l-4 border-blue-500"
                               initial={{ opacity: 0, x: -20 }}
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ delay: index * 0.1 }}
                             >
                               <div className="flex items-start space-x-3">
-                                <span className="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">
+                                <span className="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
                                   {index + 1}
                                 </span>
-                                <span className="text-gray-700 font-medium">
+                                <span className="text-gray-700 text-sm font-medium">
                                   {task}
                                 </span>
                               </div>
@@ -490,7 +390,7 @@ export default function TransitionSection({ onNext, onBack }: TransitionSectionP
                       <div className="text-center">
                         <button
                           onClick={closeModal}
-                          className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+                          className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-md font-semibold text-sm transition-colors"
                         >
                           Hoàn thành ✓
                         </button>
@@ -505,13 +405,13 @@ export default function TransitionSection({ onNext, onBack }: TransitionSectionP
         {/* Success message and next button */}
         {showRoadmap && (
           <motion.div
-            className="max-w-4xl mx-auto text-center absolute bottom-6 left-1/2 transform -translate-x-1/2 w-full px-4"
+            className="max-w-4xl mx-auto text-center absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full px-4"
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 1, type: "spring" }}
           >
             <motion.div
-              className="bg-white/15 backdrop-blur-xl rounded-3xl p-6 md:p-8 border border-white/30 mb-6 shadow-2xl"
+              className="bg-white/15 backdrop-blur-xl rounded-2xl p-4 md:p-6 border border-white/30 mb-4 shadow-xl"
               animate={{
                 boxShadow: [
                   "0 0 30px rgba(147, 51, 234, 0.3)",
@@ -539,21 +439,21 @@ export default function TransitionSection({ onNext, onBack }: TransitionSectionP
                   ease: "easeInOut"
                 }}
               >
-                <span className="text-5xl md:text-6xl">🎉</span>
+                <span className="text-4xl md:text-5xl">🎉</span>
               </motion.div>
 
-              <h3 className="text-2xl md:text-3xl font-bold mb-3 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
+              <h3 className="text-xl md:text-2xl font-bold mb-2 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
                 Xuất sắc! Hoàn thành khám phá 4 lĩnh vực!
               </h3>
 
               <motion.div
-                className="w-32 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto mb-4 rounded-full"
+                className="w-24 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mx-auto mb-3 rounded-full"
                 initial={{ width: 0 }}
-                animate={{ width: 128 }}
+                animate={{ width: 96 }}
                 transition={{ duration: 1.5, delay: 0.5 }}
               />
 
-              <p className="text-purple-100 text-lg md:text-xl leading-relaxed font-medium">
+              <p className="text-purple-100 text-sm md:text-base leading-relaxed font-medium">
                 Bạn đã tìm hiểu xong các nhiệm vụ quan trọng trong quá trình
                 <br className="hidden md:block" />
                 <span className="text-pink-200 font-semibold">quá độ lên chủ nghĩa xã hội</span> 🇻🇳
@@ -562,7 +462,7 @@ export default function TransitionSection({ onNext, onBack }: TransitionSectionP
 
             <motion.button
               onClick={onNext}
-              className="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 hover:from-purple-700 hover:via-pink-700 hover:to-purple-800 text-white px-10 md:px-12 py-4 rounded-full font-bold text-lg md:text-xl shadow-2xl border-2 border-white/20 cursor-pointer"
+              className="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 hover:from-purple-700 hover:via-pink-700 hover:to-purple-800 text-white px-6 md:px-8 py-3 rounded-full font-bold text-sm md:text-base shadow-xl border border-white/20 cursor-pointer"
               whileHover={{
                 scale: 1.05,
                 rotateZ: 1

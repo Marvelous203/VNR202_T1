@@ -96,15 +96,15 @@ export default function PrinciplesSection({ onNext, onBack }: PrinciplesSectionP
       {/* Back Button */}
       <motion.button
         onClick={onBack}
-        className="absolute top-8 left-8 z-20 bg-white/90 hover:bg-white text-slate-800 px-6 py-3 rounded-full font-bold shadow-xl transition-all duration-300 flex items-center space-x-2 cursor-pointer hover:scale-105 ease-in-out"
+        className="absolute top-4 left-4 z-20 bg-white/90 hover:bg-white text-slate-800 px-4 py-2 rounded-full font-bold shadow-lg transition-all duration-300 flex items-center space-x-1 cursor-pointer hover:scale-105 ease-in-out"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <span className="text-xl">←</span>
-        <span>Quay lại</span>
+        <span className="text-lg">←</span>
+        <span className="text-sm">Quay lại</span>
       </motion.button>
       {/* Animated background */}
       <div className="absolute inset-0">
@@ -146,31 +146,31 @@ export default function PrinciplesSection({ onNext, onBack }: PrinciplesSectionP
       <div className="relative z-10 flex-1 flex flex-col p-4 md:p-6">
         {/* Header */}
         <motion.div
-          className="text-center mb-6"
+          className="text-center mb-4"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2">
             Nguyên Tắc Xây Dựng CNXH Trong Thời Kỳ Quá Độ
           </h2>
-          <p className="text-sm md:text-base text-slate-300 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xs md:text-sm text-slate-300 max-w-3xl mx-auto leading-relaxed">
             Bốn nguyên tắc cốt lõi trong việc xây dựng chủ nghĩa xã hội trong thời kỳ quá độ ở Việt Nam
           </p>
         </motion.div>
 
         {/* Progress indicator */}
         <motion.div
-          className="max-w-2xl mx-auto mb-4"
+          className="max-w-xl mx-auto mb-3"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
         >
-          <div className="flex justify-center space-x-3 mb-2">
+          <div className="flex justify-center space-x-2 mb-1.5">
             {principlesData.map((_, index) => (
               <motion.div
                 key={index}
-                className={`w-3 h-3 rounded-full border-2 ${index === currentPrinciple
+                className={`w-2 h-2 rounded-full border ${index === currentPrinciple
                   ? 'bg-yellow-400 border-yellow-400'
                   : completedPrinciples.has(index)
                     ? 'bg-green-500 border-green-500'
@@ -191,7 +191,7 @@ export default function PrinciplesSection({ onNext, onBack }: PrinciplesSectionP
               />
             ))}
           </div>
-          <p className="text-center text-slate-400 text-sm">
+          <p className="text-center text-slate-400 text-xs">
             Nguyên tắc {currentPrinciple + 1} / {principlesData.length}
           </p>
         </motion.div>
@@ -201,7 +201,7 @@ export default function PrinciplesSection({ onNext, onBack }: PrinciplesSectionP
           <AnimatePresence mode="wait">
             <motion.div
               key={currentPrinciple}
-              className="flex-1 flex flex-col gap-4"
+              className="flex-1 flex flex-col gap-3"
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -100 }}
@@ -209,7 +209,7 @@ export default function PrinciplesSection({ onNext, onBack }: PrinciplesSectionP
             >
               {/* Header Card */}
               <motion.div
-                className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 md:p-6 shadow-xl border border-gray-200"
+                className="bg-white/95 backdrop-blur-lg rounded-xl p-3 md:p-4 shadow-lg border border-gray-200"
                 initial={{ scale: 0.8, y: -20 }}
                 animate={{ scale: 1, y: 0 }}
                 transition={{ type: "spring", duration: 0.8 }}
@@ -217,7 +217,7 @@ export default function PrinciplesSection({ onNext, onBack }: PrinciplesSectionP
                 <div className="text-center">
                   {/* Icon */}
                   <motion.div
-                    className="text-5xl md:text-6xl mb-4"
+                    className="text-3xl md:text-4xl mb-2"
                     animate={{
                       rotateY: [0, 360],
                     }}
@@ -231,17 +231,17 @@ export default function PrinciplesSection({ onNext, onBack }: PrinciplesSectionP
                   </motion.div>
 
                   {/* Title */}
-                  <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 mb-3 leading-tight">
+                  <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-800 mb-2 leading-tight">
                     {principlesData[currentPrinciple].title}
                   </h3>
 
                   {/* Subtitle */}
-                  <p className="text-base md:text-lg text-gray-600 mb-4 italic font-medium">
+                  <p className="text-sm md:text-base text-gray-600 mb-3 italic font-medium">
                     {principlesData[currentPrinciple].subtitle}
                   </p>
 
                   {/* Content */}
-                  <p className="text-sm md:text-base text-gray-700 leading-relaxed max-w-4xl mx-auto">
+                  <p className="text-xs md:text-sm text-gray-700 leading-relaxed max-w-3xl mx-auto">
                     {principlesData[currentPrinciple].content}
                   </p>
                 </div>
@@ -249,29 +249,29 @@ export default function PrinciplesSection({ onNext, onBack }: PrinciplesSectionP
 
               {/* Details Card */}
               <motion.div
-                className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-4 md:p-6 border border-blue-200 shadow-lg"
+                className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-3 md:p-4 border border-blue-200 shadow-md"
                 initial={{ scale: 0.8, y: 20 }}
                 animate={{ scale: 1, y: 0 }}
                 transition={{ type: "spring", duration: 0.8, delay: 0.2 }}
               >
-                <h4 className="text-lg md:text-xl font-bold text-blue-800 mb-4 flex items-center justify-center">
-                  <span className="mr-3 text-2xl">📋</span>
+                <h4 className="text-base md:text-lg font-bold text-blue-800 mb-3 flex items-center justify-center">
+                  <span className="mr-2 text-xl">📋</span>
                   <span>Các điểm chính</span>
                 </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   {principlesData[currentPrinciple].details.map((detail, index) => (
                     <motion.div
                       key={index}
-                      className="bg-white rounded-xl p-4 border border-blue-100 shadow-sm hover:shadow-md transition-shadow"
+                      className="bg-white rounded-lg p-3 border border-blue-100 shadow-sm hover:shadow-md transition-shadow"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4 + index * 0.1 }}
                     >
                       <div className="flex items-start space-x-3">
-                        <span className="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">
+                        <span className="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
                           {index + 1}
                         </span>
-                        <span className="text-gray-700 text-sm md:text-base font-medium leading-relaxed">
+                        <span className="text-gray-700 text-xs md:text-sm font-medium leading-relaxed">
                           {detail}
                         </span>
                       </div>
@@ -289,7 +289,7 @@ export default function PrinciplesSection({ onNext, onBack }: PrinciplesSectionP
               >
                 <motion.button
                   onClick={nextPrinciple}
-                  className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-8 py-3 rounded-full font-bold text-base md:text-lg shadow-lg hover:shadow-xl transition-all"
+                  className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-6 py-2 rounded-full font-bold text-sm md:text-base shadow-md hover:shadow-lg transition-all cursor-pointer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -340,7 +340,7 @@ export default function PrinciplesSection({ onNext, onBack }: PrinciplesSectionP
             <div className="text-center">
               <motion.button
                 onClick={onNext}
-                className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all"
+                className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-6 py-3 rounded-full font-bold text-sm shadow-lg hover:shadow-xl transition-all"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 animate={{

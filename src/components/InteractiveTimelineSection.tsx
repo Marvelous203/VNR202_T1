@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, ArrowRight, Calendar, MapPin, Users, Star, Clock, ChevronLeft } from 'lucide-react'
 import { useState } from 'react'
+import Image from 'next/image'
 
 interface InteractiveTimelineSectionProps {
   onNext: () => void
@@ -21,7 +22,9 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
       description: "Nguyễn Tất Thành (sau này là Hồ Chí Minh) rời Việt Nam, bắt đầu hành trình tìm hiểu các tư tưởng cách mạng tiến bộ trên thế giới.",
       significance: "Khởi đầu cho việc tiếp thu tư tưởng Mác-Lênin",
       color: "from-blue-500 to-cyan-500",
-      icon: <MapPin className="w-6 h-6" />
+      icon: <MapPin className="w-6 h-6" />,
+      imageSrc: "/images/1911.jpg",
+      imageAlt: "Hình ảnh năm 1911 - Nguyễn Ái Quốc ra đi tìm đường cứu nước"
     },
     {
       year: "1920",
@@ -30,7 +33,9 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
       description: "Nguyễn Ái Quốc trở thành một trong những người sáng lập Đảng Cộng sản Pháp, chính thức theo chủ nghĩa Mác-Lênin.",
       significance: "Bước ngoặt trong tư tưởng cách mạng",
       color: "from-red-500 to-pink-500",
-      icon: <Star className="w-6 h-6" />
+      icon: <Star className="w-6 h-6" />,
+      imageSrc: "/images/1920.jpg",
+      imageAlt: "Hình ảnh năm 1920 - Tham gia Đảng Cộng sản Pháp"
     },
     {
       year: "1925",
@@ -39,16 +44,20 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
       description: "Tổ chức tiền thân của Đảng Cộng sản Việt Nam được thành lập, đào tạo cán bộ cách mạng cho Việt Nam.",
       significance: "Chuẩn bị lực lượng cho việc thành lập Đảng",
       color: "from-green-500 to-emerald-500",
-      icon: <Users className="w-6 h-6" />
+      icon: <Users className="w-6 h-6" />,
+      imageSrc: "/images/1925.jpeg",
+      imageAlt: "Hình ảnh năm 1925 - Thành lập Hội Việt Nam Cách mạng Thanh niên"
     },
     {
       year: "1929",
       title: "Ba tổ chức cộng sản xuất hiện",
       location: "Việt Nam",
-      description: "Đảng Cộng sản Việt Nam, Đảng Cộng sản Đông Dương và Đảng Cộng sản Đông Dương Liên hiệp được thành lập.",
-      significance: "Sự phân tán cần được thống nhất",
+      description: "23/12/1929: Nguyễn Ái Quốc - với tư cách là phái viên quốc tế của Cộng Sản đến Hồng Kông triệu tập đại biểu của Đông Dương Cộng sản Đảng và An Nam Cộng sản Đảng đến hợp tại Cửu Long tiến hành hội nghị hợp nhất các tổ chức cộng sản thành một chính đảng duy nhất của Việt Nam (6/1 - 7/2/1930) (sau này Đảng quyết định lấy ngày 3 tháng 2 dương lịch làm ngày kỷ niệm thành lập Đảng)",
+      significance: "24/2/1930 Hoàn thành thống nhất thành một chính đảng duy nhất, chấp nhận Đông Dương Cộng sản liên đoàn gia nhập Đảng Cộng sản Việt Nam",
       color: "from-yellow-500 to-orange-500",
-      icon: <Calendar className="w-6 h-6" />
+      icon: <Calendar className="w-6 h-6" />,
+      imageSrc: "/images/1929.webp",
+      imageAlt: "Hình ảnh năm 1929 - Ba tổ chức cộng sản xuất hiện"
     },
     {
       year: "3/2/1930",
@@ -57,7 +66,9 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
       description: "Nguyễn Ái Quốc chủ trì hội nghị thống nhất ba tổ chức cộng sản thành Đảng Cộng sản Việt Nam.",
       significance: "Ngày thành lập Đảng Cộng sản Việt Nam",
       color: "from-purple-500 to-indigo-500",
-      icon: <Star className="w-6 h-6" />
+      icon: <Star className="w-6 h-6" />,
+      imageSrc: "/images/3_2_1930.jpg",
+      imageAlt: "Hình ảnh 3/2/1930 - Hội nghị thống nhất tại Hồng Kông"
     },
     {
       year: "10/1930",
@@ -66,7 +77,9 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
       description: "Theo chỉ thị của Quốc tế Cộng sản, Đảng đổi tên để phù hợp với phạm vi hoạt động rộng lớn hơn.",
       significance: "Mở rộng tầm ảnh hưởng ra toàn Đông Dương",
       color: "from-teal-500 to-blue-500",
-      icon: <Clock className="w-6 h-6" />
+      icon: <Clock className="w-6 h-6" />,
+      imageSrc: "/images/10_1930.webp",
+      imageAlt: "Hình ảnh 10/1930 - Đổi tên thành Đảng Cộng sản Đông Dương"
     }
   ]
 
@@ -121,11 +134,10 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
               <motion.button
                 key={index}
                 onClick={() => setSelectedEvent(index)}
-                className={`px-6 py-3 rounded-full border-2 transition-all duration-300 ${
-                  selectedEvent === index
-                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 border-transparent text-white'
-                    : 'border-white/30 text-gray-300 hover:border-white/50'
-                }`}
+                className={`px-6 py-3 rounded-full border-2 transition-all duration-300 ${selectedEvent === index
+                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 border-transparent text-white'
+                  : 'border-white/30 text-gray-300 hover:border-white/50'
+                  }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -160,7 +172,7 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
               <div className={`w-16 h-16 bg-gradient-to-r ${events[selectedEvent].color} rounded-xl flex items-center justify-center mb-6`}>
                 {events[selectedEvent].icon}
               </div>
-              
+
               <div className="mb-6">
                 <h2 className="text-3xl font-bold text-white mb-2">
                   {events[selectedEvent].year}
@@ -173,6 +185,15 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
                   {events[selectedEvent].location}
                 </div>
               </div>
+
+              {/* Hình ảnh theo năm */}
+              <Image
+                src={events[selectedEvent].imageSrc}
+                alt={events[selectedEvent].imageAlt}
+                width={800}
+                height={450}
+                className="w-full h-64 object-cover rounded-xl border border-white/20 mb-6"
+              />
 
               <p className="text-gray-300 leading-relaxed mb-6">
                 {events[selectedEvent].description}
@@ -189,31 +210,28 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
             {/* Visual Timeline */}
             <div className="relative">
               <div className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-purple-500"></div>
-              
+
               <div className="space-y-8">
                 {events.map((event, index) => (
                   <motion.div
                     key={index}
-                    className={`relative flex items-center cursor-pointer ${
-                      index === selectedEvent ? 'scale-110' : 'scale-100'
-                    }`}
+                    className={`relative flex items-center cursor-pointer ${index === selectedEvent ? 'scale-110' : 'scale-100'
+                      }`}
                     onClick={() => setSelectedEvent(index)}
                     whileHover={{ scale: index === selectedEvent ? 1.1 : 1.05 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className={`absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-4 border-white z-10 ${
-                      index === selectedEvent 
-                        ? 'bg-gradient-to-r from-blue-500 to-purple-500' 
-                        : index <= selectedEvent 
-                          ? 'bg-green-500' 
-                          : 'bg-gray-500'
-                    }`}></div>
-                    
-                    <div className={`${index % 2 === 0 ? 'mr-auto pr-8' : 'ml-auto pl-8'} w-5/12 p-4 rounded-lg transition-all duration-300 ${
-                      index === selectedEvent
-                        ? 'bg-white/20 border border-white/30'
-                        : 'bg-white/5 hover:bg-white/10'
-                    }`}>
+                    <div className={`absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-4 border-white z-10 ${index === selectedEvent
+                      ? 'bg-gradient-to-r from-blue-500 to-purple-500'
+                      : index <= selectedEvent
+                        ? 'bg-green-500'
+                        : 'bg-gray-500'
+                      }`}></div>
+
+                    <div className={`${index % 2 === 0 ? 'mr-auto pr-8' : 'ml-auto pl-8'} w-5/12 p-4 rounded-lg transition-all duration-300 ${index === selectedEvent
+                      ? 'bg-white/20 border border-white/30'
+                      : 'bg-white/5 hover:bg-white/10'
+                      }`}>
                       <div className="font-semibold text-white">{event.year}</div>
                       <div className="text-sm text-gray-300">{event.title}</div>
                     </div>
@@ -238,7 +256,7 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
           >
             Sự kiện trước
           </button>
-          
+
           <button
             onClick={() => setSelectedEvent(Math.min(events.length - 1, selectedEvent + 1))}
             disabled={selectedEvent === events.length - 1}
@@ -263,7 +281,7 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
               <ChevronLeft className="w-5 h-5 mr-2" />
               Quay lại
             </button>
-            
+
             {onGoToDashboard && (
               <button
                 onClick={onGoToDashboard}
@@ -273,7 +291,7 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
               </button>
             )}
           </div>
-          
+
           <button
             onClick={onNext}
             className="flex items-center px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 rounded-full transition-all duration-300 font-semibold"

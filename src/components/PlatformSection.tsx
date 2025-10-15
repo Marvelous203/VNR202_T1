@@ -1,165 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Target, Users, Cog, Globe, ChevronRight, ChevronLeft, BookOpen, Star, Award, Lightbulb } from 'lucide-react'
-
-interface Task {
-  id: string
-  title: string
-  description: string
-  details: string[]
-  icon: string
-  color: string
-}
-
-interface Characteristic {
-  id: string
-  title: string
-  description: string
-  examples: string[]
-  icon: string
-  color: string
-}
-
-const nationalDemocraticTasks: Task[] = [
-  {
-    id: 'overthrow-imperialism',
-    title: 'Đánh đổ đế quốc Pháp và phong kiến Việt Nam',
-    description: 'Giải phóng dân tộc khỏi ách thống trị của thực dân và phong kiến',
-    details: [
-      'Đấu tranh chống thực dân Pháp',
-      'Xóa bỏ chế độ phong kiến lạc hậu',
-      'Giành lại chủ quyền dân tộc',
-      'Thống nhất đất nước'
-    ],
-    icon: '⚔️',
-    color: 'from-red-500 to-red-700'
-  },
-  {
-    id: 'independence',
-    title: 'Làm cho nước Việt Nam hoàn toàn độc lập',
-    description: 'Xây dựng một nước Việt Nam độc lập, tự chủ hoàn toàn',
-    details: [
-      'Độc lập về chính trị',
-      'Tự chủ về kinh tế',
-      'Chủ quyền về lãnh thổ',
-      'Bình đẳng trong quan hệ quốc tế'
-    ],
-    icon: '🏛️',
-    color: 'from-blue-500 to-blue-700'
-  },
-  {
-    id: 'worker-peasant-government',
-    title: 'Thành lập chính phủ công nông binh',
-    description: 'Xây dựng chính quyền của nhân dân, do nhân dân, vì nhân dân',
-    details: [
-      'Quyền lực thuộc về nhân dân lao động',
-      'Công nhân làm chủ',
-      'Nông dân được giải phóng',
-      'Binh sĩ có quyền dân chủ'
-    ],
-    icon: '👥',
-    color: 'from-green-500 to-green-700'
-  },
-  {
-    id: 'land-reform',
-    title: 'Tịch thu ruộng đất phân phối cho nông dân',
-    description: 'Giải quyết vấn đề ruộng đất, giải phóng nông dân',
-    details: [
-      'Tịch thu ruộng đất của đế quốc',
-      'Tịch thu ruộng đất của phong kiến',
-      'Phân phối cho nông dân nghèo',
-      'Xóa bỏ chế độ bóc lột nông nghiệp'
-    ],
-    icon: '🌾',
-    color: 'from-yellow-500 to-yellow-700'
-  }
-]
-
-const socialistTasks: Task[] = [
-  {
-    id: 'collectivization',
-    title: 'Tịch thu máy móc, ruộng đất của tư bản gia',
-    description: 'Chuyển đổi sở hữu tư nhân thành sở hữu công hữu',
-    details: [
-      'Quốc hữu hóa các phương tiện sản xuất',
-      'Xóa bỏ chế độ bóc lột',
-      'Phát triển kinh tế tập thể',
-      'Xây dựng nền kinh tế xã hội chủ nghĩa'
-    ],
-    icon: '🏭',
-    color: 'from-purple-500 to-purple-700'
-  },
-  {
-    id: 'distribution-principle',
-    title: 'Thực hiện "các tận kỳ năng, phân tận kỳ dụng"',
-    description: 'Nguyên tắc phân phối theo lao động trong xã hội xã hội chủ nghĩa',
-    details: [
-      'Mỗi người đóng góp theo khả năng',
-      'Mỗi người hưởng thụ theo lao động',
-      'Xóa bỏ bất bình đẳng xã hội',
-      'Phát triển con người toàn diện'
-    ],
-    icon: '⚖️',
-    color: 'from-indigo-500 to-indigo-700'
-  },
-  {
-    id: 'abolish-private-property',
-    title: 'Bãi bỏ tư hữu tư sản, thực hiện công hữu',
-    description: 'Xây dựng chế độ sở hữu công hữu về phương tiện sản xuất',
-    details: [
-      'Xóa bỏ sở hữu tư nhân tư bản chủ nghĩa',
-      'Phát triển sở hữu toàn dân',
-      'Xây dựng sở hữu tập thể',
-      'Đảm bảo lợi ích chung của xã hội'
-    ],
-    icon: '🤝',
-    color: 'from-teal-500 to-teal-700'
-  }
-]
-
-const platformCharacteristics: Characteristic[] = [
-  {
-    id: 'scientific',
-    title: 'Tính khoa học',
-    description: 'Vận dụng sáng tạo chủ nghĩa Mác-Lênin vào điều kiện Việt Nam',
-    examples: [
-      'Xác định đúng tính chất cách mạng',
-      'Đề ra nhiệm vụ phù hợp quy luật',
-      'Dựa trên cơ sở lý luận vững chắc',
-      'Phân tích đúng thực tế xã hội'
-    ],
-    icon: '🔬',
-    color: 'from-blue-500 to-blue-700'
-  },
-  {
-    id: 'national',
-    title: 'Tính dân tộc',
-    description: 'Phản ánh nguyện vọng và lợi ích của nhân dân Việt Nam',
-    examples: [
-      'Kế thừa truyền thống yêu nước',
-      'Phù hợp điều kiện kinh tế-xã hội',
-      'Thể hiện đặc sắc văn hóa dân tộc',
-      'Đáp ứng nguyện vọng nhân dân'
-    ],
-    icon: '🏮',
-    color: 'from-red-500 to-red-700'
-  },
-  {
-    id: 'contemporary',
-    title: 'Tính thời đại',
-    description: 'Gắn cách mạng Việt Nam với phong trào cách mạng thế giới',
-    examples: [
-      'Phù hợp xu thế thời đại mới',
-      'Kết hợp với cách mạng thế giới',
-      'Thể hiện tinh thần quốc tế',
-      'Hướng tới tương lai tiến bộ'
-    ],
-    icon: '🌍',
-    color: 'from-green-500 to-green-700'
-  }
-]
+import { motion } from 'framer-motion'
+import { ChevronLeft, ArrowRight, BookOpen, Target, Users, Globe, Lightbulb } from 'lucide-react'
 
 interface PlatformSectionProps {
   onNext: () => void
@@ -168,363 +10,228 @@ interface PlatformSectionProps {
 }
 
 export default function PlatformSection({ onNext, onBack, onGoToDashboard }: PlatformSectionProps) {
-  const [currentStep, setCurrentStep] = useState(0)
-  const [selectedTask, setSelectedTask] = useState<string | null>(null)
-  const [selectedCharacteristic, setSelectedCharacteristic] = useState<string | null>(null)
-
-  const steps = [
-    'Nhiệm vụ dân tộc dân chủ',
-    'Nhiệm vụ xã hội chủ nghĩa',
-    'Đặc điểm Cương lĩnh',
-    'Ý nghĩa lịch sử'
+  const socialPoints = [
+    'Dân chúng được tự do tổ chức',
+    'Nam nữ bình quyền',
+    'Phổ thông giáo dục theo công nông hóa'
   ]
 
-  const renderNationalDemocraticTasks = () => (
-    <div className="space-y-6">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-8"
-      >
-        <h2 className="text-3xl font-bold text-white mb-4">Nhiệm vụ cách mạng dân tộc dân chủ</h2>
-        <p className="text-gray-300 text-lg">
-          Giải phóng dân tộc, xây dựng chế độ dân chủ nhân dân
-        </p>
-      </motion.div>
+  const economicPoints = [
+    'Thủ tiêu hết các thứ quốc trái, thâu hết sản nghiệp lớn của tư bản đế quốc chủ nghĩa Pháp để giao cho Chính phủ công nông binh quản lí',
+    'Thâu hết ruộng đất của đế quốc chủ nghĩa chia cho dân cày nghèo, bỏ sưu thuế',
+    'Mở mang công nông nghiệp',
+    'Thi hành luật ngày làm tám giờ'
+  ]
 
-      <div className="grid md:grid-cols-2 gap-6">
-        {nationalDemocraticTasks.map((task, index) => (
-          <motion.div
-            key={task.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.2 }}
-            className={`bg-gradient-to-br ${task.color} rounded-xl p-6 cursor-pointer transform hover:scale-105 transition-all duration-300 ${
-              selectedTask === task.id ? 'ring-4 ring-white' : ''
-            }`}
-            onClick={() => setSelectedTask(selectedTask === task.id ? null : task.id)}
-          >
-            <div className="text-4xl mb-4">{task.icon}</div>
-            <h3 className="text-xl font-bold text-white mb-2">{task.title}</h3>
-            <p className="text-gray-200 text-sm mb-4">{task.description}</p>
-            
-            <AnimatePresence>
-              {selectedTask === task.id && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="mt-4 space-y-2"
-                >
-                  {task.details.map((detail, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: idx * 0.1 }}
-                      className="flex items-center text-white text-sm"
-                    >
-                      <ChevronRight className="w-4 h-4 mr-2" />
-                      {detail}
-                    </motion.div>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        ))}
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8 }}
-        className="bg-gradient-to-r from-orange-500 to-orange-700 rounded-xl p-6 mt-8"
-      >
-        <h3 className="text-xl font-bold text-white mb-4 flex items-center">
-          <Target className="w-5 h-5 mr-2" />
-          Các nhiệm vụ khác
-        </h3>
-        <div className="grid md:grid-cols-2 gap-4">
-          <div className="bg-black bg-opacity-20 rounded-lg p-4">
-            <p className="text-white">• Thực hiện 8 tiếng làm việc</p>
-          </div>
-          <div className="bg-black bg-opacity-20 rounded-lg p-4">
-            <p className="text-white">• Bãi bỏ các thứ thuế khổ sai, công đầu</p>
-          </div>
-          <div className="bg-black bg-opacity-20 rounded-lg p-4">
-            <p className="text-white">• Thực hiện quyền tự do dân chủ</p>
-          </div>
-          <div className="bg-black bg-opacity-20 rounded-lg p-4">
-            <p className="text-white">• Thực hiện giáo dục phổ thông</p>
-          </div>
-        </div>
-      </motion.div>
-    </div>
-  )
-
-  const renderSocialistTasks = () => (
-    <div className="space-y-6">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-8"
-      >
-        <h2 className="text-3xl font-bold text-white mb-4">Nhiệm vụ cách mạng xã hội chủ nghĩa</h2>
-        <p className="text-gray-300 text-lg">
-          Xây dựng chế độ xã hội chủ nghĩa, xóa bỏ bóc lột
-        </p>
-      </motion.div>
-
-      <div className="space-y-6">
-        {socialistTasks.map((task, index) => (
-          <motion.div
-            key={task.id}
-            initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.3 }}
-            className={`bg-gradient-to-r ${task.color} rounded-xl p-6 cursor-pointer transform hover:scale-105 transition-all duration-300 ${
-              selectedTask === task.id ? 'ring-4 ring-white' : ''
-            }`}
-            onClick={() => setSelectedTask(selectedTask === task.id ? null : task.id)}
-          >
-            <div className="flex items-start justify-between">
-              <div className="flex-1">
-                <div className="flex items-center mb-4">
-                  <div className="text-4xl mr-4">{task.icon}</div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-white mb-2">{task.title}</h3>
-                    <p className="text-gray-200">{task.description}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <AnimatePresence>
-              {selectedTask === task.id && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="mt-4 grid md:grid-cols-2 gap-4"
-                >
-                  {task.details.map((detail, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: idx * 0.1 }}
-                      className="bg-black bg-opacity-20 rounded-lg p-3"
-                    >
-                      <p className="text-white text-sm">{detail}</p>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  )
-
-  const renderPlatformCharacteristics = () => (
-    <div className="space-y-6">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-8"
-      >
-        <h2 className="text-3xl font-bold text-white mb-4">Đặc điểm của Cương lĩnh</h2>
-        <p className="text-gray-300 text-lg">
-          Ba đặc điểm nổi bật của Cương lĩnh chính trị đầu tiên
-        </p>
-      </motion.div>
-
-      <div className="grid md:grid-cols-3 gap-6">
-        {platformCharacteristics.map((characteristic, index) => (
-          <motion.div
-            key={characteristic.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.2 }}
-            className={`bg-gradient-to-br ${characteristic.color} rounded-xl p-6 cursor-pointer transform hover:scale-105 transition-all duration-300 ${
-              selectedCharacteristic === characteristic.id ? 'ring-4 ring-white' : ''
-            }`}
-            onClick={() => setSelectedCharacteristic(selectedCharacteristic === characteristic.id ? null : characteristic.id)}
-          >
-            <div className="text-4xl mb-4">{characteristic.icon}</div>
-            <h3 className="text-xl font-bold text-white mb-2">{characteristic.title}</h3>
-            <p className="text-gray-200 text-sm mb-4">{characteristic.description}</p>
-            
-            <AnimatePresence>
-              {selectedCharacteristic === characteristic.id && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="mt-4 space-y-2"
-                >
-                  {characteristic.examples.map((example, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: idx * 0.1 }}
-                      className="flex items-center text-white text-sm"
-                    >
-                      <Star className="w-4 h-4 mr-2" />
-                      {example}
-                    </motion.div>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  )
-
-  const renderHistoricalSignificance = () => (
-    <div className="space-y-6">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-8"
-      >
-        <h2 className="text-3xl font-bold text-white mb-4">Ý nghĩa lịch sử của Cương lĩnh</h2>
-        <p className="text-gray-300 text-lg">
-          Tầm quan trọng và giá trị lịch sử của Cương lĩnh chính trị đầu tiên
-        </p>
-      </motion.div>
-
-      <div className="grid md:grid-cols-2 gap-6">
-        {[
-          {
-            title: 'Lần đầu tiên có cương lĩnh khoa học',
-            description: 'Việt Nam có một cương lĩnh cách mạng đúng đắn, khoa học',
-            icon: '📚',
-            color: 'from-blue-500 to-blue-700'
-          },
-          {
-            title: 'Xác định con đường cách mạng',
-            description: 'Xác định rõ con đường cách mạng vô sản cho Việt Nam',
-            icon: '🛤️',
-            color: 'from-green-500 to-green-700'
-          },
-          {
-            title: 'Đặt nền móng tư tưởng',
-            description: 'Đặt nền móng tư tưởng cho toàn bộ hoạt động của Đảng',
-            icon: '🏗️',
-            color: 'from-purple-500 to-purple-700'
-          },
-          {
-            title: 'Định hướng cách mạng',
-            description: 'Định hướng cho phong trào cách mạng Việt Nam suốt thế kỷ XX',
-            icon: '🧭',
-            color: 'from-red-500 to-red-700'
-          }
-        ].map((item, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.2 }}
-            className={`bg-gradient-to-br ${item.color} rounded-xl p-6`}
-          >
-            <div className="text-4xl mb-4">{item.icon}</div>
-            <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-            <p className="text-gray-200">{item.description}</p>
-          </motion.div>
-        ))}
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8 }}
-        className="bg-gradient-to-r from-yellow-500 to-yellow-700 rounded-xl p-8 mt-8"
-      >
-        <div className="text-center">
-          <div className="text-4xl mb-4">🎯</div>
-          <h3 className="text-2xl font-bold text-white mb-4">Kết luận</h3>
-          <p className="text-white text-lg">
-            Cương lĩnh chính trị đầu tiên của Đảng Cộng sản Việt Nam (tháng 2/1930) là một văn kiện 
-            lịch sử có ý nghĩa vô cùng to lớn, đánh dấu bước ngoặt về tư duy cách mạng, 
-            mở ra kỷ nguyên mới cho cách mạng Việt Nam.
-          </p>
-        </div>
-      </motion.div>
-    </div>
-  )
-
-  const renderCurrentStep = () => {
-    switch (currentStep) {
-      case 0:
-        return renderNationalDemocraticTasks()
-      case 1:
-        return renderSocialistTasks()
-      case 2:
-        return renderPlatformCharacteristics()
-      case 3:
-        return renderHistoricalSignificance()
-      default:
-        return renderNationalDemocraticTasks()
-    }
-  }
+  const conclusionPoints = [
+    'Phản ánh súc tích luận điểm cơ bản của cách mạng Việt Nam',
+    'Thể hiện bản lĩnh chính trị độc lập, tự chủ, sáng tạo',
+    'Đánh giá đúng mâu thuẫn cơ bản và chủ yếu của dân tộc Việt Nam',
+    'Đánh giá đúng thái độ các giai tầng trong xã hội',
+    'Thỏa mãn nhu cầu phát triển của thực tiễn cách mạng'
+  ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 p-6">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white overflow-hidden">
+      <div className="relative z-10 container mx-auto px-6 py-12">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-10"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Cương lĩnh chính trị đầu tiên của Đảng
-          </h1>
-          <p className="text-gray-300 text-xl">
-            Văn kiện lịch sử định hướng cách mạng Việt Nam (2/1930)
+          <div className="flex items-center justify-center mb-4">
+            <BookOpen className="w-8 h-8 mr-3 text-blue-400" />
+            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              Cương lĩnh chính trị đầu tiên của Đảng
+            </h1>
+          </div>
+          <p className="text-gray-300">
+            Văn kiện nền tảng định hướng cách mạng Việt Nam (2/1930)
           </p>
         </motion.div>
 
-        {/* Progress Steps */}
-        <div className="flex justify-center mb-8">
-          <div className="flex space-x-4 bg-black bg-opacity-30 rounded-full p-2">
-            {steps.map((step, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentStep(index)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  currentStep === index
-                    ? 'bg-blue-600 text-white'
-                    : 'text-gray-300 hover:text-white hover:bg-gray-700'
-                }`}
-              >
-                {step}
-              </button>
-            ))}
-          </div>
+        {/* Image */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mb-10"
+        >
+          <img
+            src="/images/ccvt.png"
+            alt="Chánh cương vắn tắt và Sách lược vắn tắt (2/1930)"
+            className="w-full rounded-2xl border border-white/20 shadow-lg"
+          />
+          <p className="text-center text-gray-400 mt-3 italic">
+            Chánh cương vắn tắt và Sách lược vắn tắt (2/1930)
+          </p>
+        </motion.div>
+
+        {/* Mục tiêu chiến lược + Nhiệm vụ chủ yếu */}
+        <div className="grid md:grid-cols-2 gap-6 mb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
+          >
+            <h2 className="text-2xl font-bold text-yellow-400 mb-4 flex items-center">
+              <Target className="w-6 h-6 mr-2" />
+              Mục tiêu chiến lược
+            </h2>
+            <ul className="space-y-3 text-gray-200">
+              <li className="flex items-start">
+                <span className="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Mâu thuẫn giữa dân tộc Việt Nam với đế quốc ngày càng gay gắt cần phải giải quyết.
+              </li>
+              <li className="flex items-start">
+                <span className="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                ⇒ Xác định đường lối chiến lược của cách mạng Việt Nam: “chủ trương làm tư sản dân quyền c.m và thổ địa c.m để đi tới xã hội cộng sản”.
+              </li>
+            </ul>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
+          >
+            <h2 className="text-2xl font-bold text-red-400 mb-4">Nhiệm vụ chủ yếu trước mắt</h2>
+            <div className="text-gray-200 leading-relaxed">
+              “Đánh đổ đế quốc chủ nghĩa Pháp và bọn phong kiến, làm cho nước Nam hoàn toàn độc lập”.
+            </div>
+          </motion.div>
         </div>
 
-        {/* Content */}
-        <AnimatePresence mode="wait">
+        {/* Phương diện xã hội + kinh tế */}
+        <div className="grid md:grid-cols-2 gap-6 mb-10">
           <motion.div
-            key={currentStep}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
+          >
+            <h3 className="text-xl font-bold text-green-400 mb-4">Phương diện xã hội</h3>
+            <ul className="space-y-3 text-gray-200">
+              {socialPoints.map((item, idx) => (
+                <li key={idx} className="flex items-start">
+                  <span className="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.35 }}
+            className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
           >
-            {renderCurrentStep()}
+            <h3 className="text-xl font-bold text-blue-400 mb-4">Phương diện kinh tế</h3>
+            <ul className="space-y-3 text-gray-200">
+              {economicPoints.map((item, idx) => (
+                <li key={idx} className="flex items-start">
+                  <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
           </motion.div>
-        </AnimatePresence>
+        </div>
+
+        {/* Lực lượng cách mạng */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 mb-10"
+        >
+          <h3 className="text-xl font-bold text-emerald-400 mb-4 flex items-center">
+            <Users className="w-6 h-6 mr-2" />
+            Lực lượng cách mạng
+          </h3>
+          <p className="text-gray-200 mb-4">
+            Phải đoàn kết công nhân, nông dân - đây là lực lượng cơ bản, trong đó giai cấp công nhân lãnh đạo; đồng thời chủ trương đoàn kết tất cả giai cấp, các lực lượng tiến bộ, yêu nước để tập trung chống đế quốc và tay sai.
+          </p>
+          <div className="bg-emerald-500/20 border border-emerald-400/40 rounded-xl p-4 text-sm text-emerald-100">
+            ⇒ Đảng “phải thu phục cho được đại bộ phận giai cấp mình ... đại bộ phận dân cày, ... hết sức liên lạc với tiểu tư sản, trí thức và trung nông ... để kéo họ đi vào phe vô sản giai cấp. Còn đối với bọn phú nông, trung, tiểu địa chủ và tư bản An Nam mà chưa rõ mặt phản c.m thì phải lợi dụng, ít lâu mới làm cho họ đứng trung lập”.
+          </div>
+        </motion.div>
+
+        {/* Phương pháp, quốc tế, vai trò Đảng */}
+        <div className="grid md:grid-cols-3 gap-6 mb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
+            className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
+          >
+            <h3 className="text-xl font-bold text-orange-400 mb-3 flex items-center">
+              <Lightbulb className="w-6 h-6 mr-2" />
+              Phương pháp cách mạng
+            </h3>
+            <p className="text-gray-200">
+              Bạo lực cách mạng của quần chúng, không thỏa hiệp trong bất cứ hoàn cảnh nào.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
+          >
+            <h3 className="text-xl font-bold text-cyan-400 mb-3 flex items-center">
+              <Globe className="w-6 h-6 mr-2" />
+              Đoàn kết quốc tế
+            </h3>
+            <p className="text-gray-200">
+              Cách mạng Việt Nam là một bộ phận của cách mạng vô sản thế giới.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.55 }}
+            className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
+          >
+            <h3 className="text-xl font-bold text-pink-400 mb-3">Vai trò lãnh đạo của Đảng</h3>
+            <p className="text-gray-200">
+              “Đảng là đội tiên phong của vô sản giai cấp phải thu phục cho được đại bộ phận giai cấp mình, phải làm cho giai cấp mình lãnh đạo được dân chúng”.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Kết luận */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="bg-gradient-to-r from-yellow-600/30 to-red-600/30 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
+        >
+          <h3 className="text-2xl font-bold text-yellow-300 mb-4">Kết luận</h3>
+          <ul className="space-y-3 text-gray-200">
+            {conclusionPoints.map((item, idx) => (
+              <li key={idx} className="flex items-start">
+                <span className="w-2 h-2 bg-yellow-300 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
 
         {/* Navigation */}
-        <div className="flex justify-between items-center mt-12">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
+          className="flex justify-between items-center mt-12"
+        >
           <div className="flex items-center space-x-4">
             <button
               onClick={onBack}
@@ -533,7 +240,7 @@ export default function PlatformSection({ onNext, onBack, onGoToDashboard }: Pla
               <ChevronLeft className="w-5 h-5 mr-2" />
               Quay lại
             </button>
-            
+
             {onGoToDashboard && (
               <button
                 onClick={onGoToDashboard}
@@ -544,33 +251,14 @@ export default function PlatformSection({ onNext, onBack, onGoToDashboard }: Pla
             )}
           </div>
 
-          <div className="flex space-x-4">
-            <button
-              onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
-              disabled={currentStep === 0}
-              className="px-6 py-3 bg-gray-700 hover:bg-gray-600 disabled:bg-gray-800 disabled:opacity-50 text-white rounded-lg transition-colors duration-300"
-            >
-              Bước trước
-            </button>
-            
-            {currentStep < steps.length - 1 ? (
-              <button
-                onClick={() => setCurrentStep(Math.min(steps.length - 1, currentStep + 1))}
-                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-300"
-              >
-                Bước tiếp
-              </button>
-            ) : (
-              <button
-                onClick={onNext}
-                className="flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-300"
-              >
-                Tiếp tục
-                <ChevronRight className="w-5 h-5 ml-2" />
-              </button>
-            )}
-          </div>
-        </div>
+          <button
+            onClick={onNext}
+            className="flex items-center px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 rounded-full transition-all duration-300 font-semibold"
+          >
+            Tiếp theo
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </button>
+        </motion.div>
       </div>
     </div>
   )

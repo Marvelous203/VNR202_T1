@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, ArrowRight, Calendar, MapPin, Users, Star, Clock, ChevronLeft } from 'lucide-react'
 import { useState } from 'react'
+import Image from 'next/image'
 
 interface InteractiveTimelineSectionProps {
   onNext: () => void
@@ -21,7 +22,9 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
       description: "Nguyễn Tất Thành (sau này là Hồ Chí Minh) rời Việt Nam, bắt đầu hành trình tìm hiểu các tư tưởng cách mạng tiến bộ trên thế giới.",
       significance: "Khởi đầu cho việc tiếp thu tư tưởng Mác-Lênin",
       color: "from-blue-500 to-cyan-500",
-      icon: <MapPin className="w-6 h-6" />
+      icon: <MapPin className="w-6 h-6" />,
+      imageSrc: "/images/1911.jpg",
+      imageAlt: "Hình ảnh năm 1911 - Nguyễn Ái Quốc ra đi tìm đường cứu nước"
     },
     {
       year: "1920",
@@ -30,7 +33,9 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
       description: "Nguyễn Ái Quốc trở thành một trong những người sáng lập Đảng Cộng sản Pháp, chính thức theo chủ nghĩa Mác-Lênin.",
       significance: "Bước ngoặt trong tư tưởng cách mạng",
       color: "from-red-500 to-pink-500",
-      icon: <Star className="w-6 h-6" />
+      icon: <Star className="w-6 h-6" />,
+      imageSrc: "/images/1920.jpg",
+      imageAlt: "Hình ảnh năm 1920 - Tham gia Đảng Cộng sản Pháp"
     },
     {
       year: "1925",
@@ -39,7 +44,9 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
       description: "Tổ chức tiền thân của Đảng Cộng sản Việt Nam được thành lập, đào tạo cán bộ cách mạng cho Việt Nam.",
       significance: "Chuẩn bị lực lượng cho việc thành lập Đảng",
       color: "from-green-500 to-emerald-500",
-      icon: <Users className="w-6 h-6" />
+      icon: <Users className="w-6 h-6" />,
+      imageSrc: "/images/1925.jpeg",
+      imageAlt: "Hình ảnh năm 1925 - Thành lập Hội Việt Nam Cách mạng Thanh niên"
     },
     {
       year: "1929",
@@ -48,7 +55,9 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
       description: "23/12/1929: Nguyễn Ái Quốc - với tư cách là phái viên quốc tế của Cộng Sản đến Hồng Kông triệu tập đại biểu của Đông Dương Cộng sản Đảng và An Nam Cộng sản Đảng đến hợp tại Cửu Long tiến hành hội nghị hợp nhất các tổ chức cộng sản thành một chính đảng duy nhất của Việt Nam (6/1 - 7/2/1930) (sau này Đảng quyết định lấy ngày 3 tháng 2 dương lịch làm ngày kỷ niệm thành lập Đảng)",
       significance: "24/2/1930 Hoàn thành thống nhất thành một chính đảng duy nhất, chấp nhận Đông Dương Cộng sản liên đoàn gia nhập Đảng Cộng sản Việt Nam",
       color: "from-yellow-500 to-orange-500",
-      icon: <Calendar className="w-6 h-6" />
+      icon: <Calendar className="w-6 h-6" />,
+      imageSrc: "/images/1929.webp",
+      imageAlt: "Hình ảnh năm 1929 - Ba tổ chức cộng sản xuất hiện"
     },
     {
       year: "3/2/1930",
@@ -57,7 +66,9 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
       description: "Nguyễn Ái Quốc chủ trì hội nghị thống nhất ba tổ chức cộng sản thành Đảng Cộng sản Việt Nam.",
       significance: "Ngày thành lập Đảng Cộng sản Việt Nam",
       color: "from-purple-500 to-indigo-500",
-      icon: <Star className="w-6 h-6" />
+      icon: <Star className="w-6 h-6" />,
+      imageSrc: "/images/3_2_1930.jpg",
+      imageAlt: "Hình ảnh 3/2/1930 - Hội nghị thống nhất tại Hồng Kông"
     },
     {
       year: "10/1930",
@@ -66,7 +77,9 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
       description: "Theo chỉ thị của Quốc tế Cộng sản, Đảng đổi tên để phù hợp với phạm vi hoạt động rộng lớn hơn.",
       significance: "Mở rộng tầm ảnh hưởng ra toàn Đông Dương",
       color: "from-teal-500 to-blue-500",
-      icon: <Clock className="w-6 h-6" />
+      icon: <Clock className="w-6 h-6" />,
+      imageSrc: "/images/10_1930.webp",
+      imageAlt: "Hình ảnh 10/1930 - Đổi tên thành Đảng Cộng sản Đông Dương"
     }
   ]
 
@@ -172,6 +185,15 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
                   {events[selectedEvent].location}
                 </div>
               </div>
+
+              {/* Hình ảnh theo năm */}
+              <Image
+                src={events[selectedEvent].imageSrc}
+                alt={events[selectedEvent].imageAlt}
+                width={800}
+                height={450}
+                className="w-full h-64 object-cover rounded-xl border border-white/20 mb-6"
+              />
 
               <p className="text-gray-300 leading-relaxed mb-6">
                 {events[selectedEvent].description}

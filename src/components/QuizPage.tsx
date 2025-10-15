@@ -4,7 +4,10 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface QuizPageProps {
+  onNext?: () => void
   onBack: () => void
+  onRestart: () => void
+  onGoToDashboard?: () => void
 }
 
 interface Question {
@@ -18,117 +21,127 @@ interface Question {
 const questions: Question[] = [
   {
     id: 1,
-    question: "Tư tưởng Hồ Chí Minh về độc lập dân tộc nhấn mạnh điều gì?",
+    question: "Đảng Cộng sản Việt Nam được thành lập vào ngày nào?",
     options: [
-      "Độc lập gắn liền với phát triển kinh tế tư bản",
-      "Độc lập phải gắn với tự do, hạnh phúc của nhân dân",
-      "Độc lập chỉ cần công nhận trên giấy tờ pháp lý",
-      "Độc lập là tách biệt hoàn toàn khỏi thế giới"
+      "3/2/1930",
+      "19/5/1930", 
+      "2/9/1945",
+      "19/8/1945"
     ],
-    correctAnswer: 1
+    correctAnswer: 0,
+    explanation: "Đảng Cộng sản Việt Nam được thành lập ngày 3/2/1930 tại Hội nghị thống nhất ở Hồng Kông do Nguyễn Ái Quốc chủ trì."
   },
   {
     id: 2,
-    question: '"Không có gì quý hơn độc lập, tự do" là lời khẳng định của Chủ tịch Hồ Chí Minh trong bối cảnh:',
+    question: "Ai là người chủ trì Hội nghị thống nhất thành lập Đảng Cộng sản Việt Nam?",
     options: [
-      "Kháng chiến chống Mỹ cứu nước",
-      "Kháng chiến chống Pháp",
-      "Cải cách ruộng đất",
-      "Xây dựng CNXH ở miền Bắc"
+      "Hồ Chí Minh",
+      "Nguyễn Ái Quốc",
+      "Trần Phú",
+      "Lê Hồng Phong"
     ],
-    correctAnswer: 0
+    correctAnswer: 1,
+    explanation: "Nguyễn Ái Quốc (sau này là Hồ Chí Minh) đã chủ trì Hội nghị thống nhất ba tổ chức cộng sản thành Đảng Cộng sản Việt Nam."
   },
   {
     id: 3,
-    question: "Ba con đường phát triển xã hội mà lịch sử nhân loại từng trải qua là:",
+    question: "Cương lĩnh chính trị đầu tiên của Đảng được thông qua vào thời gian nào?",
     options: [
-      "Chiếm hữu nô lệ – phong kiến – tư bản chủ nghĩa",
-      "Tư bản chủ nghĩa – xã hội chủ nghĩa – quá độ lên xã hội chủ nghĩa",
-      "Tư bản chủ nghĩa – cộng sản chủ nghĩa – nông nghiệp cổ truyền",
-      "Phong kiến – tư bản chủ nghĩa – xã hội chủ nghĩa"
+      "Tháng 2/1930",
+      "Tháng 10/1930",
+      "Tháng 3/1930",
+      "Tháng 5/1930"
     ],
-    correctAnswer: 1
+    correctAnswer: 0,
+    explanation: "Cương lĩnh chính trị đầu tiên của Đảng được thông qua vào tháng 2/1930, ngay sau khi Đảng được thành lập."
   },
   {
     id: 4,
-    question: "Việt Nam lựa chọn con đường phát triển nào sau Cách mạng Tháng Tám 1945?",
+    question: "Ba tổ chức cộng sản tiền thân của Đảng Cộng sản Việt Nam là:",
     options: [
-      "Con đường tư bản chủ nghĩa",
-      "Con đường xã hội chủ nghĩa",
-      "Con đường phát triển hỗn hợp",
-      "Con đường liên minh với các nước thực dân"
+      "Đảng Cộng sản Việt Nam, Đảng Cộng sản Đông Dương, Đảng Cộng sản Đông Dương Liên hiệp",
+      "Hội Việt Nam Cách mạng Thanh niên, Đảng Cộng sản Việt Nam, Đảng Cộng sản Đông Dương",
+      "Đảng Cộng sản Đông Dương, Đảng Cộng sản Pháp, Đảng Cộng sản Việt Nam",
+      "Hội Việt Nam Cách mạng Thanh niên, Đảng Cộng sản Đông Dương Liên hiệp, Đảng Cộng sản Pháp"
     ],
-    correctAnswer: 1
+    correctAnswer: 0,
+    explanation: "Ba tổ chức cộng sản được thống nhất là: Đảng Cộng sản Việt Nam, Đảng Cộng sản Đông Dương và Đảng Cộng sản Đông Dương Liên hiệp."
   },
   {
     id: 5,
-    question: "Đặc điểm lớn nhất của thời kỳ quá độ lên CNXH ở Việt Nam là:",
+    question: "Yếu tố nào KHÔNG phải là nguyên nhân khách quan dẫn đến sự ra đời của Đảng Cộng sản Việt Nam?",
     options: [
-      "Bỏ qua chế độ phong kiến",
-      "Từ một nước thuộc địa nửa phong kiến, nông nghiệp lạc hậu tiến thẳng lên CNXH",
-      "Từ một nước công nghiệp hoá tiến lên CNXH",
-      "Kết hợp song song cả hai chế độ phong kiến và tư bản"
+      "Sự phát triển của giai cấp công nhân Việt Nam",
+      "Khủng hoảng về đường lối cứu nước của các phong trào yêu nước cũ",
+      "Ảnh hưởng của Cách mạng Tháng Mười Nga",
+      "Sự can thiệp của các nước phương Tây"
     ],
-    correctAnswer: 1
+    correctAnswer: 3,
+    explanation: "Sự can thiệp của các nước phương Tây không phải là nguyên nhân khách quan dẫn đến sự ra đời của Đảng."
   },
   {
     id: 6,
-    question: "Một trong những nội dung cốt lõi trong tư tưởng Hồ Chí Minh về độc lập dân tộc là:",
+    question: "Đặc điểm nào KHÔNG phải của Cương lĩnh chính trị đầu tiên của Đảng?",
     options: [
-      "Độc lập dân tộc phải gắn liền với chủ nghĩa xã hội",
-      "Độc lập dân tộc có thể dựa vào các nước lớn",
-      "Độc lập dân tộc chỉ cần giành chính quyền",
-      "Độc lập dân tộc có thể tồn tại không cần dân chủ"
+      "Tính khoa học",
+      "Tính dân tộc", 
+      "Tính thời đại",
+      "Tính khu vực"
     ],
-    correctAnswer: 0
+    correctAnswer: 3,
+    explanation: "Ba đặc điểm của Cương lĩnh chính trị đầu tiên là: tính khoa học, tính dân tộc và tính thời đại."
   },
   {
     id: 7,
-    question: 'Hồ Chí Minh từng khẳng định: "Nước độc lập mà dân không hưởng hạnh phúc tự do thì độc lập cũng chẳng có nghĩa lý gì". Điều này thể hiện tư tưởng gì?',
+    question: "Hội Việt Nam Cách mạng Thanh niên được thành lập vào năm nào?",
     options: [
-      "Độc lập dân tộc gắn với quyền lợi nhân dân",
-      "Độc lập dân tộc tách biệt với dân chủ",
-      "Độc lập dân tộc quan trọng hơn đời sống nhân dân",
-      "Độc lập dân tộc là mục tiêu duy nhất của cách mạng"
+      "1925",
+      "1926",
+      "1927", 
+      "1929"
     ],
-    correctAnswer: 0
+    correctAnswer: 0,
+    explanation: "Hội Việt Nam Cách mạng Thanh niên được thành lập năm 1925 tại Quảng Châu, Trung Quốc."
   },
   {
     id: 8,
-    question: "Trong con đường quá độ lên CNXH ở Việt Nam hiện nay, mục tiêu cơ bản nhất là gì?",
+    question: "Nhiệm vụ cách mạng dân tộc dân chủ trong Cương lĩnh đầu tiên bao gồm:",
     options: [
-      "Xây dựng đất nước giàu mạnh, xã hội công bằng, dân chủ, văn minh",
-      "Xây dựng giai cấp tư sản dân tộc mạnh",
-      "Cạnh tranh bình đẳng với các cường quốc tư bản",
-      "Hoàn thành công nghiệp hóa, không cần gắn với CNXH"
+      "Chỉ đánh đổ đế quốc Pháp",
+      "Đánh đổ đế quốc Pháp và phong kiến Việt Nam, thành lập chính phủ công nông binh",
+      "Chỉ thành lập chính phủ công nông binh",
+      "Chỉ tịch thu ruộng đất của địa chủ"
     ],
-    correctAnswer: 0
+    correctAnswer: 1,
+    explanation: "Nhiệm vụ cách mạng dân tộc dân chủ bao gồm đánh đổ đế quốc Pháp và phong kiến Việt Nam, thành lập chính phủ công nông binh."
   },
   {
     id: 9,
-    question: 'Trong các tiền nhân, ai là người chủ trương "khai dân trí, chấn dân khí, hậu dân sinh"?',
+    question: "Tháng 10/1930, Đảng Cộng sản Việt Nam đổi tên thành:",
     options: [
-      "Phan Bội Châu",
-      "Phan Châu Trinh",
-      "Nguyễn Ái Quốc",
-      "Nguyễn Trãi"
+      "Đảng Cộng sản Đông Dương",
+      "Đảng Lao động Việt Nam",
+      "Đảng Cộng sản Việt Nam Đông Dương",
+      "Đảng Cách mạng Việt Nam"
     ],
-    correctAnswer: 1
+    correctAnswer: 0,
+    explanation: "Tháng 10/1930, theo chỉ thị của Quốc tế Cộng sản, Đảng đổi tên thành Đảng Cộng sản Đông Dương."
   },
   {
     id: 10,
-    question: "Tư tưởng Hồ Chí Minh chịu ảnh hưởng trực tiếp từ những yếu tố nào sau đây?",
+    question: "Ý nghĩa lịch sử của việc thành lập Đảng Cộng sản Việt Nam là:",
     options: [
-      "Chủ nghĩa Mác – Lênin, truyền thống dân tộc, tinh hoa văn hoá nhân loại",
-      "Chủ nghĩa tư bản phương Tây",
-      "Chủ nghĩa vô chính phủ",
-      "Chủ nghĩa dân tộc hẹp hòi"
+      "Chỉ thống nhất các tổ chức cộng sản",
+      "Bước ngoặt vĩ đại của cách mạng Việt Nam, mở ra kỷ nguyên mới",
+      "Chỉ tạo ra tổ chức chính trị mới",
+      "Chỉ có ý nghĩa với giai cấp công nhân"
     ],
-    correctAnswer: 0
+    correctAnswer: 1,
+    explanation: "Sự ra đời của Đảng là bước ngoặt vĩ đại của cách mạng Việt Nam, mở ra kỷ nguyên mới cho dân tộc Việt Nam."
   }
 ]
 
-export default function QuizPage({ onBack }: QuizPageProps) {
+export default function QuizPage({ onNext, onBack, onRestart, onGoToDashboard }: QuizPageProps) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>(new Array(questions.length).fill(-1))
   const [showResult, setShowResult] = useState(false)
@@ -236,24 +249,35 @@ export default function QuizPage({ onBack }: QuizPageProps) {
               {getScoreMessage(score)}
             </p>
 
-            <div className="mb-6">
+            <div className="mb-6 flex gap-4 justify-center">
               <motion.button
                 onClick={onBack}
                 className="bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white px-6 py-3 rounded-full font-bold cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                🔙 Quay lại trang chính
+                🔙 Quay lại
               </motion.button>
 
-              {/* <motion.button
-                onClick={onComplete}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full font-bold"
+              <motion.button
+                onClick={onRestart}
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-full font-bold cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                🎓 Hoàn thành
-              </motion.button> */}
+                🔄 Làm lại quiz
+              </motion.button>
+
+              {onNext && (
+                <motion.button
+                  onClick={onNext}
+                  className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-6 py-3 rounded-full font-bold cursor-pointer"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  ✨ Chia sẻ cảm nghĩ
+                </motion.button>
+              )}
             </div>
           </motion.div>
         </div>
@@ -263,19 +287,36 @@ export default function QuizPage({ onBack }: QuizPageProps) {
 
   return (
     <div className="h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
-      {/* Back Button */}
-      <motion.button
-        onClick={onBack}
-        className="absolute top-4 left-4 z-20 bg-white/90 hover:bg-white text-blue-800 px-4 py-2 rounded-full font-bold shadow-lg transition-all duration-300 flex items-center space-x-1 cursor-pointer"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <span className="text-lg">←</span>
-        <span className="text-sm">Quay lại</span>
-      </motion.button>
+      {/* Navigation Buttons */}
+      <div className="absolute top-4 left-4 z-20 flex items-center space-x-4">
+        <motion.button
+          onClick={onBack}
+          className="bg-white/90 hover:bg-white text-blue-800 px-4 py-2 rounded-full font-bold shadow-lg transition-all duration-300 flex items-center space-x-1 cursor-pointer"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="text-lg">←</span>
+          <span className="text-sm">Quay lại</span>
+        </motion.button>
+
+        {onGoToDashboard && (
+          <motion.button
+            onClick={onGoToDashboard}
+            className="bg-purple-600/90 hover:bg-purple-700 text-white px-4 py-2 rounded-full font-bold shadow-lg transition-all duration-300 flex items-center space-x-1 cursor-pointer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <span className="text-lg">📊</span>
+            <span className="text-sm">Bảng điều khiển</span>
+          </motion.button>
+        )}
+      </div>
 
       {/* Progress bar */}
       <div className="absolute top-4 right-4 z-20 bg-white/90 px-4 py-2 rounded-full font-bold text-blue-800 text-sm">

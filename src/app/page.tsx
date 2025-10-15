@@ -1,80 +1,108 @@
 'use client'
 
-import { useState } from 'react'
-import LandingPage from '../components/LandingPage'
-import AncestorsSection from '../components/AncestorsSection'
-import HCMSection from '../components/HCMSection'
-import TwoPathsSection from '../components/TwoPathsSection'
-import SocialismSection from '../components/SocialismSection'
-import TransitionSection from '../components/TransitionSection'
-import PrinciplesSection from '../components/PrinciplesSection'
-import ConclusionSection from '../components/ConclusionSection'
-import FinalPage from '../components/FinalPage'
-import QuizPage from '../components/QuizPage'
-
-type Section = 'landing' | 'ancestors' | 'hcm' | 'two-paths' | 'socialism' | 'transition' | 'principles' | 'conclusion' | 'final' | 'quiz'
+import { useState, useEffect } from 'react'
+import LandingPage from '@/components/LandingPage'
+import HistoricalContextSection from '@/components/HistoricalContextSection'
+import InteractiveTimelineSection from '@/components/InteractiveTimelineSection'
+import PartyFormationSection from '@/components/PartyFormationSection'
+import PlatformSection from '@/components/PlatformSection'
+import HistoricalSignificanceSection from '@/components/HistoricalSignificanceSection'
+import InevitabilitySection from '@/components/InevitabilitySection'
+import QuizPage from '@/components/QuizPage'
+import SharingSection from '@/components/SharingSection'
+import DashboardSection from '@/components/DashboardSection'
 
 export default function Home() {
-  const [currentSection, setCurrentSection] = useState<Section>('landing')
+  const [currentSection, setCurrentSection] = useState('landing')
 
-  const goToNextSection = () => {
-    const sections: Section[] = ['landing', 'ancestors', 'hcm', 'two-paths', 'socialism', 'transition', 'principles', 'conclusion', 'final']
-    const currentIndex = sections.indexOf(currentSection)
-    if (currentIndex < sections.length - 1) {
-      setCurrentSection(sections[currentIndex + 1])
-    }
-  }
+  // Scroll to top whenever section changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [currentSection])
 
-  const goToPreviousSection = () => {
-    const sections: Section[] = ['landing', 'ancestors', 'hcm', 'two-paths', 'socialism', 'transition', 'principles', 'conclusion', 'final']
-    const currentIndex = sections.indexOf(currentSection)
-    if (currentIndex > 0) {
-      setCurrentSection(sections[currentIndex - 1])
-    }
-  }
-
-  const restartJourney = () => {
-    setCurrentSection('landing')
-  }
-
-  const goToQuiz = () => {
-    setCurrentSection('quiz')
-  }
-
-  const goBackToFinal = () => {
-    setCurrentSection('final')
-  }
-
-  const renderCurrentSection = () => {
-    switch (currentSection) {
-      case 'landing':
-        return <LandingPage onStartJourney={goToNextSection} />
-      case 'ancestors':
-        return <AncestorsSection onNext={goToNextSection} onBack={goToPreviousSection} />
-      case 'hcm':
-        return <HCMSection onNext={goToNextSection} onBack={goToPreviousSection} />
-      case 'two-paths':
-        return <TwoPathsSection onNext={goToNextSection} onBack={goToPreviousSection} />
-      case 'socialism':
-        return <SocialismSection onNext={goToNextSection} onBack={goToPreviousSection} />
-      case 'transition':
-        return <TransitionSection onNext={goToNextSection} onBack={goToPreviousSection} />
-      case 'principles':
-        return <PrinciplesSection onNext={goToNextSection} onBack={goToPreviousSection} />
-      case 'conclusion':
-        return <ConclusionSection onNext={goToNextSection} onBack={goToPreviousSection} />
-      case 'final':
-        return <FinalPage onReplay={restartJourney} onBack={goToPreviousSection} onQuiz={goToQuiz} />
-      case 'quiz':
-        return <QuizPage onBack={goBackToFinal} />
-      default:
-        return <LandingPage onStartJourney={goToNextSection} />
-    }
-  }
+  const goToHistoricalContext = () => setCurrentSection('historical-context')
+  const goToTimeline = () => setCurrentSection('timeline')
+  const goToPartyFormation = () => setCurrentSection('party-formation')
+  const goToPlatform = () => setCurrentSection('platform')
+  const goToHistoricalSignificance = () => setCurrentSection('historical-significance')
+  const goToInevitability = () => setCurrentSection('inevitability')
+  const goToQuiz = () => setCurrentSection('quiz')
+  const goToSharing = () => setCurrentSection('sharing')
+  const goToDashboard = () => setCurrentSection('dashboard')
+  const goToLanding = () => setCurrentSection('landing')
 
   return (
-    <div className="min-h-screen">
-      {renderCurrentSection()}
-    </div>
+    <main>
+      {currentSection === 'landing' && (
+        <LandingPage 
+          onStartJourney={goToHistoricalContext}
+        />
+      )}
+      {currentSection === 'historical-context' && (
+        <HistoricalContextSection 
+          onNext={goToTimeline}
+          onBack={goToLanding}
+          onGoToDashboard={goToDashboard}
+        />
+      )}
+      {currentSection === 'timeline' && (
+        <InteractiveTimelineSection 
+          onNext={goToPartyFormation}
+          onBack={goToHistoricalContext}
+          onGoToDashboard={goToDashboard}
+        />
+      )}
+      {currentSection === 'party-formation' && (
+        <PartyFormationSection 
+          onNext={goToPlatform}
+          onBack={goToTimeline}
+          onGoToDashboard={goToDashboard}
+        />
+      )}
+      {currentSection === 'platform' && (
+        <PlatformSection 
+          onNext={goToHistoricalSignificance}
+          onBack={goToPartyFormation}
+          onGoToDashboard={goToDashboard}
+        />
+      )}
+      {currentSection === 'historical-significance' && (
+        <HistoricalSignificanceSection 
+          onNext={goToInevitability}
+          onBack={goToPlatform}
+          onGoToDashboard={goToDashboard}
+        />
+      )}
+      {currentSection === 'inevitability' && (
+        <InevitabilitySection 
+          onNext={goToQuiz}
+          onBack={goToHistoricalSignificance}
+          onGoToDashboard={goToDashboard}
+        />
+      )}
+      {currentSection === 'quiz' && (
+        <QuizPage 
+          onNext={goToSharing}
+          onBack={goToInevitability}
+          onRestart={goToLanding}
+          onGoToDashboard={goToDashboard}
+        />
+      )}
+      {currentSection === 'dashboard' && (
+        <DashboardSection 
+          onBack={goToQuiz}
+          onRestart={goToLanding}
+          onNavigateToSection={(section) => setCurrentSection(section)}
+        />
+      )}
+      {currentSection === 'sharing' && (
+        <SharingSection 
+          onBack={goToQuiz}
+          onNext={goToDashboard}
+          onRestart={goToLanding}
+          onGoToDashboard={goToDashboard}
+        />
+      )}
+    </main>
   )
 }

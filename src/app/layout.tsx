@@ -13,9 +13,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Tư tưởng Hồ Chí Minh về độc lập dân tộc",
-  description: "Tư tưởng Hồ Chí Minh về độc lập dân tộc và sự khác biệt so với quan niệm độc lập của các tiền nhân",
+  title: "Lịch sử Đảng Cộng sản Việt Nam",
+  description: "Tìm hiểu quá trình ra đời, phát triển và vai trò lãnh đạo của Đảng Cộng sản Việt Nam trong sự nghiệp giải phóng dân tộc, xây dựng và bảo vệ Tổ quốc.",
 };
+
 
 export default function RootLayout({
   children,

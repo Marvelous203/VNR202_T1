@@ -11,7 +11,12 @@ interface LandingPageProps {
 export default function LandingPage({ onStartJourney }: LandingPageProps) {
   const [showButton, setShowButton] = useState(false)
 
-  const title = "Tư tưởng Hồ Chí Minh về độc lập dân tộc và sự khác biệt so với quan niệm độc lập của các tiền nhân"
+  const title = "Đảng Cộng Sản Việt Nam"
+  const subtitle = "Hành trình thành lập và phát triển của Đảng Cộng sản Việt Nam - Bước ngoặt vĩ đại của cách mạng Việt Nam"
+
+  const handleTypingComplete = () => {
+    setShowButton(true)
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-900 via-red-800 to-yellow-600 flex items-center justify-center relative overflow-hidden">
@@ -91,14 +96,21 @@ export default function LandingPage({ onStartJourney }: LandingPageProps) {
             </div>
           </motion.div>
 
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-8 leading-tight">
-            <TypingEffect
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-red-500 via-yellow-500 to-red-600 bg-clip-text text-transparent">
+            <TypingEffect 
               text={title}
-              speed={45}
-              onComplete={() => setShowButton(true)}
-              className="text-white"
+              speed={100}
+              onComplete={handleTypingComplete}
             />
           </h1>
+          <div className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            {showButton && (
+              <TypingEffect 
+                text={subtitle}
+                speed={50}
+              />
+            )}
+          </div>
 
           {showButton && (
             <motion.div
@@ -143,7 +155,7 @@ export default function LandingPage({ onStartJourney }: LandingPageProps) {
             transition={{ duration: 1, delay: 1 }}
             className="text-yellow-200 text-lg mt-8 max-w-2xl mx-auto"
           >
-            Khám phá hành trình tư tưởng về độc lập dân tộc từ các tiền nhân đến Chủ tịch Hồ Chí Minh
+            Khám phá hành trình phát triển của Đảng Cộng sản Việt Nam từ các tiền nhân đến Chủ tịch Hồ Chí Minh
           </motion.p>
         )}
       </div>

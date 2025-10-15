@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Target, TrendingUp, Users, Globe, ChevronRight, ChevronLeft, Star, Award, Lightbulb, Crown, Zap, Factory, BookOpen, Heart } from 'lucide-react'
 
@@ -140,6 +140,11 @@ interface InevitabilitySectionProps {
 export default function InevitabilitySection({ onNext, onBack, onGoToDashboard }: InevitabilitySectionProps) {
   const [selectedFactor, setSelectedFactor] = useState<string | null>(null)
   const [currentView, setCurrentView] = useState(0)
+
+  // Scroll to top when currentView changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [currentView])
 
   const views = ['Tổng quan', 'Phân tích', 'Chứng minh', 'Kết luận']
 

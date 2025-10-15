@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Calendar, Users, MapPin, Star, ChevronRight, ChevronLeft, BookOpen, Target } from 'lucide-react'
 
@@ -105,6 +105,11 @@ export default function PartyFormationSection({ onNext, onBack, onGoToDashboard 
   const [currentStep, setCurrentStep] = useState(0)
   const [selectedContext, setSelectedContext] = useState<string | null>(null)
   const [selectedOrg, setSelectedOrg] = useState<string | null>(null)
+
+  // Scroll to top when currentStep changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [currentStep])
 
   const steps = [
     'Bối cảnh lịch sử',

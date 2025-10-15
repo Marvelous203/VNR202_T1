@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Target, TrendingUp, Users, Globe, ChevronRight, ChevronLeft, Star, Award, Lightbulb, Crown, Zap } from 'lucide-react'
 
@@ -107,6 +107,11 @@ export default function HistoricalSignificanceSection({ onNext, onBack, onGoToDa
   const [selectedSignificance, setSelectedSignificance] = useState<string | null>(null)
   const [currentView, setCurrentView] = useState(0)
 
+  // Scroll to top when currentView changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [currentView])
+
   const views = ['Tổng quan', 'Chi tiết', 'Kết luận']
 
   const renderOverview = () => (
@@ -121,7 +126,9 @@ export default function HistoricalSignificanceSection({ onNext, onBack, onGoToDa
           Sự ra đời của Đảng Cộng sản Việt Nam mang ý nghĩa lịch sử to lớn
         </p>
       </motion.div>
-
+      <div className="flex justify-center items-center">
+        <img src="/images/Chamdutkhunghoang.png" alt="Chamdutkhunghoang" className="w-96 h-auto rounded-xl" />
+      </div>
       <div className="grid md:grid-cols-3 gap-6">
         {historicalSignificances.slice(0, 3).map((significance, index) => (
           <motion.div
@@ -237,7 +244,10 @@ export default function HistoricalSignificanceSection({ onNext, onBack, onGoToDa
           Tổng kết về tầm quan trọng của việc thành lập Đảng Cộng sản Việt Nam
         </p>
       </motion.div>
-
+    <div className="flex justify-center items-center gap-8">
+      <img src="/images/Thangloi2.png" alt="Thangloi2" className="w-96 h-80 rounded-xl" />
+      <img src="/images/Thangloi1.png" alt="Thangloi1" className="w-96 h-80 rounded-xl" />
+    </div>
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}

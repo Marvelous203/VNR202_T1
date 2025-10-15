@@ -8,6 +8,7 @@ import PartyFormationSection from '@/components/PartyFormationSection'
 import PlatformSection from '@/components/PlatformSection'
 import HistoricalSignificanceSection from '@/components/HistoricalSignificanceSection'
 import InevitabilitySection from '@/components/InevitabilitySection'
+import BreakthroughSection from '@/components/BreakthroughSection'
 import QuizPage from '@/components/QuizPage'
 import SharingSection from '@/components/SharingSection'
 import DashboardSection from '@/components/DashboardSection'
@@ -26,6 +27,7 @@ export default function Home() {
   const goToPlatform = () => setCurrentSection('platform')
   const goToHistoricalSignificance = () => setCurrentSection('historical-significance')
   const goToInevitability = () => setCurrentSection('inevitability')
+  const goToBreakthrough = () => setCurrentSection('breakthrough')
   const goToQuiz = () => setCurrentSection('quiz')
   const goToSharing = () => setCurrentSection('sharing')
   const goToDashboard = () => setCurrentSection('dashboard')
@@ -75,15 +77,22 @@ export default function Home() {
       )}
       {currentSection === 'inevitability' && (
         <InevitabilitySection 
-          onNext={goToQuiz}
+          onNext={goToBreakthrough}
           onBack={goToHistoricalSignificance}
+          onGoToDashboard={goToDashboard}
+        />
+      )}
+      {currentSection === 'breakthrough' && (
+        <BreakthroughSection 
+          onNext={goToQuiz}
+          onBack={goToInevitability}
           onGoToDashboard={goToDashboard}
         />
       )}
       {currentSection === 'quiz' && (
         <QuizPage 
           onNext={goToSharing}
-          onBack={goToInevitability}
+          onBack={goToBreakthrough}
           onRestart={goToLanding}
           onGoToDashboard={goToDashboard}
         />

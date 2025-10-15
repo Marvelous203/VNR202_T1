@@ -58,6 +58,14 @@ const sections = [
 
   },
   {
+    id: 'breakthrough',
+    title: 'Bước ngoặt vĩ đại',
+    description: 'Chứng minh sự ra đời của Đảng là bước ngoặt vĩ đại của cách mạng Việt Nam',
+    icon: Star,
+    color: 'from-amber-500 to-yellow-500',
+
+  },
+  {
     id: 'quiz',
     title: 'Kiểm tra kiến thức',
     description: 'Làm bài quiz để kiểm tra hiểu biết về lịch sử thành lập Đảng',
@@ -94,6 +102,13 @@ const tools = [
     icon: MessageCircle,
     color: 'from-purple-400 to-purple-600',
     url: 'https://claude.ai'
+  },
+  {
+    name: 'Gemini',
+    description: 'Tóm tắt ý chính từ giáo trình để chuẩn bị nội dung câu hỏi',
+    icon: Bot,
+    color: 'from-green-400 to-green-600',
+    url: 'https://gemini.google.com'
   }
 ]
 

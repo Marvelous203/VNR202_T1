@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface QuizPageProps {
@@ -146,6 +146,11 @@ export default function QuizPage({ onNext, onBack, onRestart, onGoToDashboard }:
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>(new Array(questions.length).fill(-1))
   const [showResult, setShowResult] = useState(false)
   const [showAnswerFeedback, setShowAnswerFeedback] = useState(false)
+
+  // Scroll to top when currentQuestionIndex changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [currentQuestionIndex])
 
   const currentQuestion = questions[currentQuestionIndex]
   const isLastQuestion = currentQuestionIndex === questions.length - 1
@@ -430,7 +435,7 @@ export default function QuizPage({ onNext, onBack, onRestart, onGoToDashboard }:
                   ) : (
                     <div className="flex items-center space-x-2 text-red-400">
                       <span className="text-xl">❌</span>
-                      <span className="font-bold">Chưa đúng. Đáp án đúng là: {String.fromCharCode(65 + currentQuestion.correctAnswer)}</span>
+                      <span className="font-bold">Sai. Đáp án đúng là: {String.fromCharCode(65 + currentQuestion.correctAnswer)} - {currentQuestion.explanation}</span>
                     </div>
                   )}
                 </motion.div>

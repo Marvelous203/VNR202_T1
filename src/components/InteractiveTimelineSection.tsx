@@ -45,8 +45,8 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
       year: "1929",
       title: "Ba tổ chức cộng sản xuất hiện",
       location: "Việt Nam",
-      description: "Đảng Cộng sản Việt Nam, Đảng Cộng sản Đông Dương và Đảng Cộng sản Đông Dương Liên hiệp được thành lập.",
-      significance: "Sự phân tán cần được thống nhất",
+      description: "23/12/1929: Nguyễn Ái Quốc - với tư cách là phái viên quốc tế của Cộng Sản đến Hồng Kông triệu tập đại biểu của Đông Dương Cộng sản Đảng và An Nam Cộng sản Đảng đến hợp tại Cửu Long tiến hành hội nghị hợp nhất các tổ chức cộng sản thành một chính đảng duy nhất của Việt Nam (6/1 - 7/2/1930) (sau này Đảng quyết định lấy ngày 3 tháng 2 dương lịch làm ngày kỷ niệm thành lập Đảng)",
+      significance: "24/2/1930 Hoàn thành thống nhất thành một chính đảng duy nhất, chấp nhận Đông Dương Cộng sản liên đoàn gia nhập Đảng Cộng sản Việt Nam",
       color: "from-yellow-500 to-orange-500",
       icon: <Calendar className="w-6 h-6" />
     },
@@ -121,11 +121,10 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
               <motion.button
                 key={index}
                 onClick={() => setSelectedEvent(index)}
-                className={`px-6 py-3 rounded-full border-2 transition-all duration-300 ${
-                  selectedEvent === index
-                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 border-transparent text-white'
-                    : 'border-white/30 text-gray-300 hover:border-white/50'
-                }`}
+                className={`px-6 py-3 rounded-full border-2 transition-all duration-300 ${selectedEvent === index
+                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 border-transparent text-white'
+                  : 'border-white/30 text-gray-300 hover:border-white/50'
+                  }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -160,7 +159,7 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
               <div className={`w-16 h-16 bg-gradient-to-r ${events[selectedEvent].color} rounded-xl flex items-center justify-center mb-6`}>
                 {events[selectedEvent].icon}
               </div>
-              
+
               <div className="mb-6">
                 <h2 className="text-3xl font-bold text-white mb-2">
                   {events[selectedEvent].year}
@@ -189,31 +188,28 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
             {/* Visual Timeline */}
             <div className="relative">
               <div className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-purple-500"></div>
-              
+
               <div className="space-y-8">
                 {events.map((event, index) => (
                   <motion.div
                     key={index}
-                    className={`relative flex items-center cursor-pointer ${
-                      index === selectedEvent ? 'scale-110' : 'scale-100'
-                    }`}
+                    className={`relative flex items-center cursor-pointer ${index === selectedEvent ? 'scale-110' : 'scale-100'
+                      }`}
                     onClick={() => setSelectedEvent(index)}
                     whileHover={{ scale: index === selectedEvent ? 1.1 : 1.05 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className={`absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-4 border-white z-10 ${
-                      index === selectedEvent 
-                        ? 'bg-gradient-to-r from-blue-500 to-purple-500' 
-                        : index <= selectedEvent 
-                          ? 'bg-green-500' 
-                          : 'bg-gray-500'
-                    }`}></div>
-                    
-                    <div className={`${index % 2 === 0 ? 'mr-auto pr-8' : 'ml-auto pl-8'} w-5/12 p-4 rounded-lg transition-all duration-300 ${
-                      index === selectedEvent
-                        ? 'bg-white/20 border border-white/30'
-                        : 'bg-white/5 hover:bg-white/10'
-                    }`}>
+                    <div className={`absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full border-4 border-white z-10 ${index === selectedEvent
+                      ? 'bg-gradient-to-r from-blue-500 to-purple-500'
+                      : index <= selectedEvent
+                        ? 'bg-green-500'
+                        : 'bg-gray-500'
+                      }`}></div>
+
+                    <div className={`${index % 2 === 0 ? 'mr-auto pr-8' : 'ml-auto pl-8'} w-5/12 p-4 rounded-lg transition-all duration-300 ${index === selectedEvent
+                      ? 'bg-white/20 border border-white/30'
+                      : 'bg-white/5 hover:bg-white/10'
+                      }`}>
                       <div className="font-semibold text-white">{event.year}</div>
                       <div className="text-sm text-gray-300">{event.title}</div>
                     </div>
@@ -238,7 +234,7 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
           >
             Sự kiện trước
           </button>
-          
+
           <button
             onClick={() => setSelectedEvent(Math.min(events.length - 1, selectedEvent + 1))}
             disabled={selectedEvent === events.length - 1}
@@ -263,7 +259,7 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
               <ChevronLeft className="w-5 h-5 mr-2" />
               Quay lại
             </button>
-            
+
             {onGoToDashboard && (
               <button
                 onClick={onGoToDashboard}
@@ -273,7 +269,7 @@ export default function InteractiveTimelineSection({ onNext, onBack, onGoToDashb
               </button>
             )}
           </div>
-          
+
           <button
             onClick={onNext}
             className="flex items-center px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 rounded-full transition-all duration-300 font-semibold"
